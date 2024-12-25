@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Sidebar from "./sidebar/Sidebar"; // Match exact casing
+import Userslide1 from "./components/Userslide1";
+import Panditprofile from "./components/Panditprofile";
 
-function App() {
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar />
+      {/* Main Content */}
+      <div className="flex-1 p-6">
+        <Routes>
+          <Route path="/" element={<Userslide1 />} />
+          {/* Additional Routes can go here */}
+          <Route path="/pandit" element={<Panditprofile/>}/>
+        </Routes>
+      </div>
     </div>
+
+      
+   
   );
-}
+};
 
 export default App;
