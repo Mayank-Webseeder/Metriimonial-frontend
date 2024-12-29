@@ -1,20 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaSignOutAlt, FaUserAlt, FaUsers, FaBook, FaUserCircle, FaUserTie } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
-    <div className="h-screen w-64 bg-[#762140] text-white fixed flex flex-col justify-between">
+    <div className="h-screen w-64 bg-[#762140] text-white fixed flex flex-col shadow-lg">
       {/* Sidebar Content */}
-      <div className="p-4">
-        <div className="mb-8">
-          {/* Logo */}
+      <div className="p-4 flex-grow overflow-y-auto">
+        {/* Sidebar Header */}
+        <div className="mb-6 text-center">
           <img
             src="/metrimonial.png"
             alt="Logo"
-            className="w-12 h-12 object-contain mx-auto rounded-full"
+            className="w-14 h-14 object-contain mx-auto rounded-full border-2 border-white"
           />
-          <h1 className="text-center text-2xl font-bold mt-2">Metrimonial-Dashboard</h1>
+          <h1 className="text-xl font-bold mt-2">Metrimonial</h1>
+          <h2 className="text-xs font-medium">Dashboard</h2>
         </div>
 
         {/* Navigation Menu */}
@@ -22,42 +23,47 @@ const Sidebar = () => {
           <ul className="space-y-4">
             <li>
               <Link
-                to="/"
-                className="block p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                to="/user-data"
+                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
               >
-                Home
+                <FaUserAlt className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium">User Details</span>
               </Link>
             </li>
             <li>
               <Link
                 to="/sub-admin"
-                className="block p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
               >
-                Sub-Admin
+                <FaUsers className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium">Sub-Admin</span>
               </Link>
             </li>
             <li>
               <Link
                 to="/pandit"
-                className="block p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
               >
-                Pandit-Profile
+                <FaBook className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium">Pandit Profile</span>
               </Link>
             </li>
             <li>
               <Link
                 to="/Kathavachak"
-                className="block p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
               >
-                Kathavachak
+                <FaUserCircle className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium">Kathavachak</span>
               </Link>
             </li>
             <li>
               <Link
-                to="/Kathavachak"
-                className="block p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                to="/other-profile"
+                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
               >
-                Other-Profile
+                <FaUserTie className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium">Other Profile</span>
               </Link>
             </li>
           </ul>
@@ -67,10 +73,10 @@ const Sidebar = () => {
       {/* Logout Button */}
       <div className="p-4">
         <button
-          className="flex items-center w-full p-2 rounded-md bg-white text-[#762140] font-semibold"
+          className="flex items-center justify-center w-full p-2 rounded-md bg-white text-[#762140] font-semibold shadow-md transition duration-300 hover:bg-[#a5526b] hover:text-white"
           onClick={() => alert("Logging out...")}
         >
-          <FaSignOutAlt className="w-5 h-5 mr-2" /> {/* Logout icon */}
+          <FaSignOutAlt className="w-4 h-4 mr-2" />
           Logout
         </button>
       </div>
