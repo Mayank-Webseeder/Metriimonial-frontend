@@ -143,7 +143,7 @@ function Userslide1() {
               <strong>Email:</strong> {selectedUser.email}
             </p>
             <p className="mb-4">
-              <strong>Compection:</strong> {selectedUser.complection}
+              <strong>Complection:</strong> {selectedUser.complection}
             </p>
             <p className="mb-4">
               <strong>Height:</strong> {selectedUser.height}

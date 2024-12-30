@@ -92,7 +92,7 @@ function Userprofileupdate() {
             />
           </div>
           <div className="w-1/2">
-            <label className="block mb-2">Complexion:</label>
+            <label className="block mb-2">Complection:</label>
             <input
               type="text"
               name="complection"

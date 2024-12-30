@@ -11,7 +11,7 @@ import Protectedroutes from "./services/Protectedroutes";
 import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoutes from "./services/Protectedroutes";
 import Subadmis from "./components/Subadmis";
-import Userprofileupdate from "./updatecoponents/Userprofileupdate";
+import Userprofileupdate from "./updatecomponents/Userprofileupdate";
 
 
 const App = () => {

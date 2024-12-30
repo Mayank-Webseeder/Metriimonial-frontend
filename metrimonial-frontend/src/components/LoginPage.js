@@ -32,27 +32,33 @@ const LoginPage = () => {
     e.preventDefault();
     if (validateForm()) {
       // Hardcoded admin and user credentials
-      const adminCredentials = { email: "admin@example.com", password: "admin123" };
-      const userCredentials = { email: "user@example.com", password: "user123" };
+      // const adminCredentials = { email: "admin@example.com", password: "admin123" };
+      // const userCredentials = { email: "user@example.com", password: "user123" };
 
       // Check if the email and password match the hardcoded admin or user credentials
-      if (
-        formData.email === adminCredentials.email &&
-        formData.password === adminCredentials.password
-      ) {
-        localStorage.setItem("role", "admin"); // Store role as admin
-        navigate("/admin-dashboard"); // Redirect to admin dashboard
-      } else if (
-        formData.email === userCredentials.email &&
-        formData.password === userCredentials.password
-      ) {
-        localStorage.setItem("role", "user"); // Store role as user
-        navigate("/user-data"); // Redirect to user data page
-      } else {
-        setErrors("Invalid email or password.");
-      }
-    }
-  };
+    //   if (
+    //     formData.email === adminCredentials.email &&
+    //     formData.password === adminCredentials.password
+    //   ) {
+    //     localStorage.setItem("role", "admin"); // Store role as admin
+    //     navigate("/admin-dashboard"); // Redirect to admin dashboard
+    //   } else if (
+    //     formData.email === userCredentials.email &&
+    //     formData.password === userCredentials.password
+    //   ) {
+    //     localStorage.setItem("role", "user"); // Store role as user
+    //     navigate("/user-data"); // Redirect to user data page
+    //   } else {
+    //     setErrors("Invalid email or password.");
+    //   }
+    // }
+     
+  }
+  localStorage.setItem("loggedIn", true); // Store logged-in status
+  localStorage.setItem("userinfo", JSON.stringify(formData)); // Optionally store user data
+  navigate("/user-data"); // Redirect to user-data page
+  }
+  ;
 
   return (
     <div

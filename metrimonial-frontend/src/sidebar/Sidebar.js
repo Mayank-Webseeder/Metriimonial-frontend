@@ -1,8 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt, FaUserAlt, FaUsers, FaBook, FaUserCircle, FaUserTie } from "react-icons/fa";
 
 const Sidebar = () => {
+ const navigate = useNavigate()
+const handleLogout=()=>{
+  localStorage.removeItem('loggedIn');
+  localStorage.removeItem('userinfo');
+  navigate("/login")
+}
+
   return (
     <div className="h-screen w-64 bg-[#762140] text-white fixed flex flex-col shadow-lg">
       {/* Sidebar Content */}
@@ -74,7 +81,7 @@ const Sidebar = () => {
       <div className="p-4">
         <button
           className="flex items-center justify-center w-full p-2 rounded-md bg-white text-[#762140] font-semibold shadow-md transition duration-300 hover:bg-[#a5526b] hover:text-white"
-          onClick={() => alert("Logging out...")}
+          onClick={handleLogout}
         >
           <FaSignOutAlt className="w-4 h-4 mr-2" />
           Logout
