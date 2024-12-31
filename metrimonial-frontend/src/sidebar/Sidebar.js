@@ -1,14 +1,23 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSignOutAlt, FaUserAlt, FaUsers, FaBook, FaUserCircle, FaUserTie } from "react-icons/fa";
+import {
+  FaSignOutAlt,
+  FaUserAlt,
+  FaUsers,
+  FaBook,
+  FaUserCircle,
+  FaStar,
+  FaHandshake,
+  FaRegBuilding,
+} from "react-icons/fa";
 
 const Sidebar = () => {
- const navigate = useNavigate()
-const handleLogout=()=>{
-  localStorage.removeItem('loggedIn');
-  localStorage.removeItem('userinfo');
-  navigate("/login")
-}
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userinfo");
+    navigate("/login");
+  };
 
   return (
     <div className="h-screen w-64 bg-[#762140] text-white fixed flex flex-col shadow-lg">
@@ -21,7 +30,7 @@ const handleLogout=()=>{
             alt="Logo"
             className="w-14 h-14 object-contain mx-auto rounded-full border-2 border-white"
           />
-          <h1 className="text-xl font-bold mt-2">Metrimonial</h1>
+          <h1 className="text-xl font-bold mt-2">Matrimonial</h1>
           <h2 className="text-xs font-medium">Dashboard</h2>
         </div>
 
@@ -57,7 +66,7 @@ const handleLogout=()=>{
             </li>
             <li>
               <Link
-                to="/Kathavachak"
+                to="/kathavachak"
                 className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
               >
                 <FaUserCircle className="w-4 h-4 mr-2" />
@@ -66,11 +75,29 @@ const handleLogout=()=>{
             </li>
             <li>
               <Link
-                to="/other-profile"
+                to="/astrologer"
                 className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
               >
-                <FaUserTie className="w-4 h-4 mr-2" />
-                <span className="text-sm font-medium">Other Profile</span>
+                <FaStar className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium">Astrologer</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/activist"
+                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+              >
+                <FaHandshake className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium">Activist</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/committee"
+                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+              >
+                <FaRegBuilding className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium">Committee</span>
               </Link>
             </li>
           </ul>

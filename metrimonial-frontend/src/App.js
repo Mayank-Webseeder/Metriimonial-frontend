@@ -12,6 +12,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoutes from "./services/Protectedroutes";
 import Subadmis from "./components/Subadmis";
 import Userprofileupdate from "./updatecomponents/Userprofileupdate";
+import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
 
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/sub-admin" element={<Subadmis/>}/>
           <Route path="add-subadmin" element={<SubAdminUser/>}/>
           <Route path="/update" element={<Userprofileupdate/>}/>
+          <Route path="/update-pandit" element={<Panditprofileupdate/>}/>
           
         </Route>
 
