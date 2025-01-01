@@ -1,8 +1,9 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Sidebar from "./sidebar/Sidebar"; // Match exact casing
 import Userslide1 from "./components/Userslide1";
 import Panditprofile from "./components/Panditprofile";
+<<<<<<< HEAD
 import LoginPage from "./components/LoginPage";
 import OTPVerification from "./components/OTPVerification";
 import SignupPage from "./components/SignupForm";
@@ -13,38 +14,24 @@ import ProtectedRoutes from "./services/Protectedroutes";
 import Subadmis from "./components/Subadmis";
 import Userprofileupdate from "./updatecomponents/Userprofileupdate";
 import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
+=======
+
+>>>>>>> parent of 8b97783 (second commit)
 
 
 const App = () => {
   return (
    
-    // <div className="flex">
-    //   {/* Sidebar */}
-    //   {/* <Sidebar /> */}
-    //   {/* Main Content */}
-    //   <div className="flex-1 p-6">
-    //     <Routes>
-    //     <Route path="/login" element={<LoginPage />} />
-    //     <Route path="/signup" element={<SignupPage />} />
-    //     <Route path="/otp" element={<OTPVerification />} />
-    //     <Route path="/subadmin" element={<SubAdminUser />} />
-    //       <Route path="/user-data" element={<Userslide1 />} />
-    //       {/* Additional Routes can go here */}
-    //       <Route path="/pandit" element={<Panditprofile/>}/>
-    //     </Routes>
-    //   </div>
-    // </div>
-
-<Routes>
-        {/* Public Routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/otp" element={<OTPVerification />} />
-        {/* Protected Routes */}
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/user-data" element={<Userslide1/>} />
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar />
+      {/* Main Content */}
+      <div className="flex-1 p-6">
+        <Routes>
+          <Route path="/" element={<Userslide1 />} />
+          {/* Additional Routes can go here */}
           <Route path="/pandit" element={<Panditprofile/>}/>
+<<<<<<< HEAD
           <Route path="/sub-admin" element={<Subadmis/>}/>
           <Route path="add-subadmin" element={<SubAdminUser/>}/>
           <Route path="/update" element={<Userprofileupdate/>}/>
@@ -55,6 +42,11 @@ const App = () => {
         {/* Default Route (can be used to redirect users who are not authenticated) */}
         <Route path="/" element={<Navigate to="/login" replace />} />
       </Routes>
+=======
+        </Routes>
+      </div>
+    </div>
+>>>>>>> parent of 8b97783 (second commit)
 
       
    
