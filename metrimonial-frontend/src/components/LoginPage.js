@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ number: "", password: "" });
   const [errors, setErrors] = useState("");
 
   const handleChange = (e) => {
@@ -16,8 +17,8 @@ const LoginPage = () => {
   };
 
   const validateForm = () => {
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
-      setErrors("Please enter a valid email address.");
+    if (!formData.number || !/^\d{10}$/.test(formData.number)) {
+      setErrors("Please enter a valid 10-digit mobile number.");
       return false;
     }
     if (!formData.password || formData.password.length < 6) {
@@ -28,37 +29,34 @@ const LoginPage = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Hardcoded admin and user credentials
-      // const adminCredentials = { email: "admin@example.com", password: "admin123" };
-      // const userCredentials = { email: "user@example.com", password: "user123" };
-
-      // Check if the email and password match the hardcoded admin or user credentials
-    //   if (
-    //     formData.email === adminCredentials.email &&
-    //     formData.password === adminCredentials.password
-    //   ) {
-    //     localStorage.setItem("role", "admin"); // Store role as admin
-    //     navigate("/admin-dashboard"); // Redirect to admin dashboard
-    //   } else if (
-    //     formData.email === userCredentials.email &&
-    //     formData.password === userCredentials.password
-    //   ) {
-    //     localStorage.setItem("role", "user"); // Store role as user
-    //     navigate("/user-data"); // Redirect to user data page
-    //   } else {
-    //     setErrors("Invalid email or password.");
-    //   }
-    // }
-     
-  }
-  localStorage.setItem("loggedIn", true); // Store logged-in status
-  localStorage.setItem("userinfo", JSON.stringify(formData)); // Optionally store user data
-  navigate("/user-data"); // Redirect to user-data page
-  }
-  ;
+      try {
+        const response = await axios.post("http://localhost:3600/api/v1/user/signIn", {
+          mobileNo: formData.number,
+          password: formData.password,
+        });
+  
+        if (response.data.status) {
+          // Store the entire response or specific fields in localStorage
+          localStorage.setItem("loggedIn", true);
+          localStorage.setItem("userInfo", JSON.stringify(response.data.user));
+          localStorage.setItem("message", response.data.message);
+  
+          // Redirect to the desired page
+          navigate("/user-data");
+        } else {
+          setErrors(response.data.message || "Invalid mobile number or password.");
+        }
+      } catch (error) {
+        setErrors(
+          error.response?.data?.message || "An error occurred while logging in. Please try again."
+        );
+      }
+    }
+  };
+  
 
   return (
     <div
@@ -71,20 +69,18 @@ const LoginPage = () => {
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">Welcome Back!</h2>
         <p className="text-center text-white-900 mb-6">Log in to continue.</p>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">Mobile Number</label>
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type="number"
+              name="number"
+              value={formData.number}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Enter your email"
+              placeholder="Enter your mobile number"
             />
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
@@ -97,10 +93,8 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Error Message */}
           {errors && <p className="text-red-500 text-sm">{errors}</p>}
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-red-900 text-white py-3 rounded-lg shadow-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
