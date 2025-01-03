@@ -11,6 +11,7 @@ const SignupForm = () => {
     dob: '',
     city: '',
   });
+  console.log(formData);
 
   const [message, setMessage] = useState(null); // To show success/error messages
 
@@ -29,6 +30,7 @@ const SignupForm = () => {
         'http://localhost:3600/api/v1/user/signUp',
         formData
       );
+      console.log(response.data);
       setMessage({ type: 'success', text: response.data.message || 'Signup successful!' });
       setFormData({
         username: '',
