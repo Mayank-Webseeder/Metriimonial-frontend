@@ -7,12 +7,12 @@ import LoginPage from "./components/LoginPage";
 import OTPVerification from "./components/OTPVerification";
 import SignupPage from "./components/SignupForm";
 import SubAdminUser from "./components/SubAdminUser";
-import Protectedroutes from "./services/Protectedroutes";
+import Protectedroutes from "./components/Protectedroutes";
 import AdminDashboard from "./components/AdminDashboard";
-import ProtectedRoutes from "./services/Protectedroutes";
 import Subadmis from "./components/Subadmis";
 import Userprofileupdate from "./updatecomponents/Userprofileupdate";
 import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
+import Adduser from "./components/adduser/Adduser";
 
 
 const App = () => {
@@ -41,7 +41,7 @@ const App = () => {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/otp" element={<OTPVerification />} />
         {/* Protected Routes */}
-        <Route element={<ProtectedRoutes />}>
+        <Route element={<Protectedroutes/>}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/user-data" element={<Userslide1/>} />
           <Route path="/pandit" element={<Panditprofile/>}/>
@@ -49,6 +49,7 @@ const App = () => {
           <Route path="add-subadmin" element={<SubAdminUser/>}/>
           <Route path="/update" element={<Userprofileupdate/>}/>
           <Route path="/update-pandit" element={<Panditprofileupdate/>}/>
+          <Route path="/add-user" element={<Adduser/>}/>
           
         </Route>
 
