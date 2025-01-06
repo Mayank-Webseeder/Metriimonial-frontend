@@ -5,7 +5,7 @@ import panditSlice from "./pandit/Panditslice"
 const store = configureStore({
   reducer: {
            userdata:userSlice, 
-           panditData:panditSlice
+           pandits:panditSlice
   },
 });
 

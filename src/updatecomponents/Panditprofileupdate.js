@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { updatePandit } from '../redux/pandit/Panditslice';
+import { editPandit } from '../redux/pandit/Panditslice';
 
 function Panditprofileupdate() {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ function Panditprofileupdate() {
   
     const handleSave = () => {
       // Dispatch the updateUser action
-      dispatch(updatePandit(user));
+      dispatch(editPandit(user));
   
       // Clear the selected user from localStorage
       localStorage.removeItem("selectedpandit");
