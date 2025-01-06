@@ -8,40 +8,79 @@ const SignupForm = () => {
     mobileNo: '',
     gender: '',
     password: '',
+    confirmPassword: '',
+    otp: '',
     dob: '',
     city: '',
   });
-  console.log(formData);
-
-  const [message, setMessage] = useState(null); // To show success/error messages
+  const [message, setMessage] = useState(null);
+  const [mobileError, setMobileError] = useState('');
+  const [loading, setLoading] = useState(false); // Loader state
 
   // Handle input changes
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Real-time validation and OTP API trigger for mobile number
+    if (name === 'mobileNo') {
+      if (!/^\d{10}$/.test(value)) {
+        setMobileError('Enter a valid 10-digit mobile number');
+      } else {
+        setMobileError('');
+        setLoading(true); // Start loading spinner
+        try {
+          const response = await axios.post(
+            'opt api',
+            { mobileNo: value }
+          );
+          setLoading(false); // Stop loading spinner
+          alert('OTP sent successfully!');
+        } catch (error) {
+          setLoading(false); // Stop loading spinner
+          setMessage({
+            type: 'error',
+            text: error.response?.data?.message || 'Failed to send OTP!',
+          });
+        }
+      }
+    }
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.password !== formData.confirmPassword) {
+      setMessage({ type: 'error', text: 'Passwords do not match!' });
+      return;
+    }
+
     try {
+      const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword
       const response = await axios.post(
         'http://localhost:3600/api/v1/user/signUp',
-        formData
+        dataToSend
       );
-      console.log(response.data);
-      setMessage({ type: 'success', text: response.data.message || 'Signup successful!' });
+      setMessage({
+        type: 'success',
+        text: response.data.message || 'Signup successful!',
+      });
       setFormData({
         username: '',
         mobileNo: '',
         gender: '',
         password: '',
+        confirmPassword: '',
+        otp: '',
         dob: '',
         city: '',
-      }); // Reset form
+      });
     } catch (error) {
-      setMessage({ type: 'error', text: error.response?.data?.message || 'Signup failed!' });
+      setMessage({
+        type: 'error',
+        text: error.response?.data?.message || 'Signup failed!',
+      });
     }
   };
 
@@ -59,40 +98,34 @@ const SignupForm = () => {
               Sign Up
             </h3>
             <form onSubmit={handleSubmit}>
-              <div>
-                <label className="block text-gray-700">Name</label>
-                <input
-                  type="text"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  placeholder="Enter your name"
-                  className="mt-1 p-2 w-full border rounded-md"
-                />
+              {/* Name and City Side by Side */}
+              <div className="flex gap-4">
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    placeholder="Enter your name"
+                    className="mt-1 p-2 w-full border rounded-md"
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label className="block text-gray-700">City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    placeholder="Enter your city"
+                    className="mt-1 p-2 w-full border rounded-md"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-gray-700">City</label>
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  placeholder="Enter your city"
-                  className="mt-1 p-2 w-full border rounded-md"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-gray-700">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Create a password"
-                  className="mt-1 p-2 w-full border rounded-md"
-                />
-              </div>
-              <div>
+
+              {/* Mobile Number */}
+              <div className="mt-4">
                 <label className="block text-gray-700">Phone Number</label>
                 <input
                   type="tel"
@@ -102,38 +135,91 @@ const SignupForm = () => {
                   placeholder="Enter your phone number"
                   className="mt-1 p-2 w-full border rounded-md"
                 />
+                {mobileError && (
+                  <p className="text-red-600 text-sm mt-1">{mobileError}</p>
+                )}
+                {loading && (
+                  <p className="text-blue-600 text-sm mt-1">Sending OTP...</p>
+                )}
               </div>
-              <div>
-                <label className="block text-gray-700">Gender</label>
-                <select
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
-                  className="mt-1 p-2 w-full border rounded-md"
-                >
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div className="mb-1">
-                <label className="block text-gray-700">Date of Birth</label>
+
+              {/* OTP Field */}
+              <div className="mt-4">
+                <label className="block text-gray-700">OTP</label>
                 <input
-                  type="date"
-                  name="dob"
-                  value={formData.dob}
+                  type="text"
+                  name="otp"
+                  value={formData.otp}
                   onChange={handleChange}
+                  placeholder="Enter OTP"
                   className="mt-1 p-2 w-full border rounded-md"
                 />
               </div>
+
+              {/* Password and Confirm Password */}
+              <div className="flex gap-4 mt-4">
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Create a password"
+                    className="mt-1 p-2 w-full border rounded-md"
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Confirm Password</label>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Confirm password"
+                    className="mt-1 p-2 w-full border rounded-md"
+                  />
+                </div>
+              </div>
+
+              {/* Gender and DOB */}
+              <div className="flex gap-4 mt-4">
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Gender</label>
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                    className="mt-1 p-2 w-full border rounded-md"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="w-1/2">
+                  <label className="block text-gray-700">Date of Birth</label>
+                  <input
+                    type="date"
+                    name="dob"
+                    value={formData.dob}
+                    onChange={handleChange}
+                    className="mt-1 p-2 w-full border rounded-md"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-red-900 text-white p-2 hover:bg-red-700 rounded-md"
+                className="w-full bg-red-900 text-white p-2 hover:bg-red-700 rounded-md mt-4"
               >
                 Register
               </button>
             </form>
+
+            {/* Message Display */}
             {message && (
               <div
                 className={`mt-4 p-2 text-center ${
@@ -145,6 +231,8 @@ const SignupForm = () => {
                 {message.text}
               </div>
             )}
+
+            {/* Redirect to Login */}
             <div className="mt-2 text-center">
               <p className="text-sm text-white-900">
                 <b>
