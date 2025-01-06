@@ -33,6 +33,18 @@ const Panditprofile = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle image file selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setFormData({ ...formData, image: event.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   // Handle form submission for add/edit
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +56,6 @@ const Panditprofile = () => {
         addPandit({
           ...formData,
           id: Date.now(), // Generate unique ID
-          image: formData.image || 'https://via.placeholder.com/150', // Default image if empty
         })
       );
     }
@@ -134,12 +145,11 @@ const Panditprofile = () => {
             required
           />
           <input
-            type="text"
+            type="file"
             name="image"
-            placeholder="Image URL"
+            accept="image/*"
             className="border border-gray-300 rounded-md px-4 py-2"
-            value={formData.image}
-            onChange={handleInputChange}
+            onChange={handleImageChange}
           />
         </div>
         <button
