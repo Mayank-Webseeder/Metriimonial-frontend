@@ -93,7 +93,7 @@ const SignupForm = () => {
     >
       <div className="max-w-md mx-auto bg-white bg-opacity-20 rounded-lg overflow-hidden md:max-w-lg shadow-lg">
         <div className="md:flex">
-          <div className="w-full p-6">
+          <div className="w-full p-2">
             <h3 className="text-2xl text-gray-900 font-semibold text-center mb-4">
               Sign Up
             </h3>
@@ -125,7 +125,7 @@ const SignupForm = () => {
               </div>
 
               {/* Mobile Number */}
-              <div className="mt-4">
+              <div className="mt-2">
                 <label className="block text-gray-700">Phone Number</label>
                 <input
                   type="tel"
@@ -144,7 +144,7 @@ const SignupForm = () => {
               </div>
 
               {/* OTP Field */}
-              <div className="mt-4">
+              <div className="mt-2">
                 <label className="block text-gray-700">OTP</label>
                 <input
                   type="text"
@@ -157,7 +157,7 @@ const SignupForm = () => {
               </div>
 
               {/* Password and Confirm Password */}
-              <div className="flex gap-4 mt-4">
+              <div className="flex gap-4 mt-2">
                 <div className="w-1/2">
                   <label className="block text-gray-700">Password</label>
                   <input
@@ -183,7 +183,7 @@ const SignupForm = () => {
               </div>
 
               {/* Gender and DOB */}
-              <div className="flex gap-4 mt-4">
+              <div className="flex gap-4 mt-2">
                 <div className="w-1/2">
                   <label className="block text-gray-700">Gender</label>
                   <select
