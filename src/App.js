@@ -13,6 +13,7 @@ import Subadmis from "./components/Subadmis";
 import Userprofileupdate from "./updatecomponents/Userprofileupdate";
 import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
 import Adduser from "./components/adduser/Adduser";
+import User from "./components/Services/User";
 
 
 const App = () => {
@@ -50,6 +51,8 @@ const App = () => {
           <Route path="/update" element={<Userprofileupdate/>}/>
           <Route path="/update-pandit" element={<Panditprofileupdate/>}/>
           <Route path="/add-user" element={<Adduser/>}/>
+          <Route path="/user-form" element={<User/>}/>
+
           
         </Route>
 
