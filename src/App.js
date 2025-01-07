@@ -14,6 +14,8 @@ import Userprofileupdate from "./updatecomponents/Userprofileupdate";
 import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
 import Adduser from "./components/adduser/Adduser";
 import PanditServices from "./components/Services/PanditServices";
+import Kathavachak from "./components/Kathavachak";
+
 
 
 const App = () => {
@@ -52,6 +54,7 @@ const App = () => {
           <Route path="/update-pandit" element={<Panditprofileupdate/>}/>
           <Route path="/add-user" element={<Adduser/>}/>
           <Route path="/pandit-user" element={<PanditServices/>}/>
+          <Route path="/kathavachak" element={<Kathavachak/>}/>
 
           
         </Route>
