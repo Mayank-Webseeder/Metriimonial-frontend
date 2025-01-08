@@ -3,86 +3,73 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const SignupForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    mobileNo: '',
-    gender: '',
-    password: '',
-    confirmPassword: '',
-    otp: '',
-    dob: '',
-    city: '',
+  const [userData, setUserData] = useState({
+    mobileNo: "",
+    username: "",
+    dob: "",
+    city: "",
+    gender: "",
+    password: "",
   });
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [mobileError, setMobileError] = useState('');
   const [loading, setLoading] = useState(false); // Loader state
 
-  // Handle input changes
-  const handleChange = async (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+ // Handle input changes
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setUserData((prev) => ({ ...prev, [name]: value }));
 
-    // Real-time validation and OTP API trigger for mobile number
-    if (name === 'mobileNo') {
-      if (!/^\d{10}$/.test(value)) {
-        setMobileError('Enter a valid 10-digit mobile number');
-      } else {
-        setMobileError('');
-        setLoading(true); // Start loading spinner
-        try {
-          const response = await axios.post(
-            'opt api',
-            { mobileNo: value }
-          );
-          setLoading(false); // Stop loading spinner
-          alert('OTP sent successfully!');
-        } catch (error) {
-          setLoading(false); // Stop loading spinner
-          setMessage({
-            type: 'error',
-            text: error.response?.data?.message || 'Failed to send OTP!',
-          });
-        }
-      }
+  // Real-time validation for mobile number
+  if (name === 'mobileNo') {
+    if (!/^\d{10}$/.test(value)) {
+      setMobileError('Enter a valid 10-digit mobile number');
+    } else {
+      setMobileError('');
     }
-  };
+  }
+};
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+// Handle form submission
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      setMessage({ type: 'error', text: 'Passwords do not match!' });
-      return;
-    }
+  // Check if passwords match
+  if (userData.password !== userData.confirmPassword) {
+    setMessage({ type: 'error', text: 'Passwords do not match!' });
+    return;
+  }
 
-    try {
-      const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword
-      const response = await axios.post(
-        'http://localhost:3600/api/v1/user/signUp',
-        dataToSend
-      );
-      setMessage({
-        type: 'success',
-        text: response.data.message || 'Signup successful!',
-      });
-      setFormData({
-        username: '',
-        mobileNo: '',
-        gender: '',
-        password: '',
-        confirmPassword: '',
-        otp: '',
-        dob: '',
-        city: '',
-      });
-    } catch (error) {
-      setMessage({
-        type: 'error',
-        text: error.response?.data?.message || 'Signup failed!',
-      });
-    }
-  };
+  try {
+    const { confirmPassword, ...dataToSend } = userData; // Exclude confirmPassword
+    const response = await axios.post(
+      'http://localhost:3600/api/v1/user/signUp',
+      dataToSend
+    );
+    setMessage({
+      type: 'success',
+      text: response.data.message || 'Signup successful!',
+    });
+
+    // Reset form
+    setUserData({
+      username: '',   
+      mobileNo: '',
+      gender: '',
+      password: '',
+      confirmPassword: '',
+      dob: '',
+      city: '',
+    });
+  } catch (error) {
+    setMessage({
+      type: 'error',
+      text: error.response?.data?.message || 'Signup failed!',
+    });
+  }
+ };
+  
 
   return (
     <div
@@ -105,7 +92,7 @@ const SignupForm = () => {
                   <input
                     type="text"
                     name="username"
-                    value={formData.username}
+                    value={userData.username}
                     onChange={handleChange}
                     placeholder="Enter your name"
                     className="mt-1 p-2 w-full border rounded-md"
@@ -116,7 +103,7 @@ const SignupForm = () => {
                   <input
                     type="text"
                     name="city"
-                    value={formData.city}
+                    value={userData.city}
                     onChange={handleChange}
                     placeholder="Enter your city"
                     className="mt-1 p-2 w-full border rounded-md"
@@ -130,7 +117,7 @@ const SignupForm = () => {
                 <input
                   type="tel"
                   name="mobileNo"
-                  value={formData.mobileNo}
+                  value={userData.mobileNo}
                   onChange={handleChange}
                   placeholder="Enter your phone number"
                   className="mt-1 p-2 w-full border rounded-md"
@@ -149,7 +136,7 @@ const SignupForm = () => {
                 <input
                   type="text"
                   name="otp"
-                  value={formData.otp}
+                  value={userData.otp}
                   onChange={handleChange}
                   placeholder="Enter OTP"
                   className="mt-1 p-2 w-full border rounded-md"
@@ -163,7 +150,7 @@ const SignupForm = () => {
                   <input
                     type="password"
                     name="password"
-                    value={formData.password}
+                    value={userData.password}
                     onChange={handleChange}
                     placeholder="Create a password"
                     className="mt-1 p-2 w-full border rounded-md"
@@ -174,7 +161,7 @@ const SignupForm = () => {
                   <input
                     type="password"
                     name="confirmPassword"
-                    value={formData.confirmPassword}
+                    value={userData.confirmPassword}
                     onChange={handleChange}
                     placeholder="Confirm password"
                     className="mt-1 p-2 w-full border rounded-md"
@@ -188,7 +175,7 @@ const SignupForm = () => {
                   <label className="block text-gray-700">Gender</label>
                   <select
                     name="gender"
-                    value={formData.gender}
+                    value={userData.gender}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border rounded-md"
                   >
@@ -203,7 +190,7 @@ const SignupForm = () => {
                   <input
                     type="date"
                     name="dob"
-                    value={formData.dob}
+                    value={userData.dob}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border rounded-md"
                   />
