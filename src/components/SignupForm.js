@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const SignupForm = () => {
@@ -10,13 +10,13 @@ const SignupForm = () => {
     password: '',
     confirmPassword: '',
     otp: '',
-    dob: '',
+    // dob: '',
     city: '',
   });
   const [message, setMessage] = useState(null);
   const [mobileError, setMobileError] = useState('');
-  const [loading, setLoading] = useState(false); // Loader state
-
+  // const [loading, setLoading] = useState(false); // Loader state
+  const navigate = useNavigate()
   // Handle input changes
   const handleChange = async (e) => {
     const { name, value } = e.target;
@@ -28,21 +28,21 @@ const SignupForm = () => {
         setMobileError('Enter a valid 10-digit mobile number');
       } else {
         setMobileError('');
-        setLoading(true); // Start loading spinner
-        try {
-          const response = await axios.post(
-            'opt api',
-            { mobileNo: value }
-          );
-          setLoading(false); // Stop loading spinner
-          alert('OTP sent successfully!');
-        } catch (error) {
-          setLoading(false); // Stop loading spinner
-          setMessage({
-            type: 'error',
-            text: error.response?.data?.message || 'Failed to send OTP!',
-          });
-        }
+        // setLoading(true); // Start loading spinner
+        // try {
+        //   const response = await axios.post(
+        //     'opt api',
+        //     { mobileNo: value }
+        //   );
+        //   setLoading(false); // Stop loading spinner
+        //   alert('OTP sent successfully!');
+        // } catch (error) {
+        //   setLoading(false); // Stop loading spinner
+        //   setMessage({
+        //     type: 'error',
+        //     text: error.response?.data?.message || 'Failed to send OTP!',
+        //   });
+        // }
       }
     }
   };
@@ -76,6 +76,8 @@ const SignupForm = () => {
         dob: '',
         city: '',
       });
+      navigate('/login')
+    
     } catch (error) {
       setMessage({
         type: 'error',
@@ -138,13 +140,13 @@ const SignupForm = () => {
                 {mobileError && (
                   <p className="text-red-600 text-sm mt-1">{mobileError}</p>
                 )}
-                {loading && (
+                {/* {loading && (
                   <p className="text-blue-600 text-sm mt-1">Sending OTP...</p>
-                )}
+                )} */}
               </div>
 
               {/* OTP Field */}
-              <div className="mt-2">
+              {/* <div className="mt-2">
                 <label className="block text-gray-700">OTP</label>
                 <input
                   type="text"
@@ -154,7 +156,7 @@ const SignupForm = () => {
                   placeholder="Enter OTP"
                   className="mt-1 p-2 w-full border rounded-md"
                 />
-              </div>
+              </div> */}
 
               {/* Password and Confirm Password */}
               <div className="flex gap-4 mt-2">
