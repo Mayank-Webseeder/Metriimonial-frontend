@@ -70,7 +70,7 @@ const PanditServices = () => {
               type="submit"
               className="bg-red-900 text-white py-2 px-6 rounded-lg hover:bg-red-500 transition"
             >
-              Submit
+              Next
             </button>
           </div>
         </form>

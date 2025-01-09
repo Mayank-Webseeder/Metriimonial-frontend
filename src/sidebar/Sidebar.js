@@ -9,12 +9,13 @@ import {
   FaStar,
   FaHandshake,
   FaRegBuilding,
-  FaBars
+  FaBars,
+  FaTimes,
 } from "react-icons/fa";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("loggedIn");
@@ -27,19 +28,27 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`h-screen ${isOpen ? 'w-64' : 'w-20'} bg-[#762140] text-white fixed flex flex-col shadow-lg transition-all duration-300`}>
-      {/* Toggle Button */}
+    <div className="fixed flex flex-col h-screen z-50">
+      {/* Toggle Button Always Visible */}
       <button
-        className="p-4 text-white focus:outline-none"
+        className="p-4 text-white bg-[#762140] focus:outline-none"
         onClick={toggleSidebar}
       >
-        <FaBars className="w-6 h-6" />
+        {isOpen ? (
+          <FaTimes className="w-6 h-6" />
+        ) : (
+          <FaBars className="w-6 h-6" />
+        )}
       </button>
 
       {/* Sidebar Content */}
-      <div className="p-4 flex-grow">
+      <div
+        className={`bg-[#762140] text-white shadow-lg transition-all duration-300 ${
+          isOpen ? "w-64 p-4" : "w-0 overflow-hidden"
+        }`}
+      >
         {/* Sidebar Header */}
-        <div className="mb-4 text-center">
+        <div className="text-center">
           <img
             src="/metrimonial.png"
             alt="Logo"
@@ -55,83 +64,84 @@ const Sidebar = () => {
 
         {/* Navigation Menu */}
         <nav>
-          <ul className="space-y-2">
+          <ul className="space-y-2 mt-4">
             <li>
               <Link
                 to="/user-data"
-                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaUserAlt className="w-4 h-4 mr-2" />
-                {isOpen && <span className="text-sm font-medium">User Details</span>}
+                {isOpen && <span>User Details</span>}
               </Link>
             </li>
             <li>
               <Link
                 to="/sub-admin"
-                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaUsers className="w-4 h-4 mr-2" />
-                {isOpen && <span className="text-sm font-medium">Sub-Admin</span>}
+                {isOpen && <span>Sub-Admin</span>}
               </Link>
             </li>
             <li>
               <Link
                 to="/pandit"
-                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaBook className="w-4 h-4 mr-2" />
-                {isOpen && <span className="text-sm font-medium">Pandit Profile</span>}
+                {isOpen && <span>Pandit Profile</span>}
               </Link>
             </li>
             <li>
               <Link
                 to="/kathavachak"
-                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaUserCircle className="w-4 h-4 mr-2" />
-                {isOpen && <span className="text-sm font-medium">Kathavachak</span>}
+                {isOpen && <span>Kathavachak</span>}
               </Link>
             </li>
             <li>
               <Link
                 to="/astrologer"
-                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaStar className="w-4 h-4 mr-2" />
-                {isOpen && <span className="text-sm font-medium">Astrologer</span>}
+                {isOpen && <span>Astrologer</span>}
               </Link>
             </li>
             <li>
               <Link
                 to="/activist"
-                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaHandshake className="w-4 h-4 mr-2" />
-                {isOpen && <span className="text-sm font-medium">Activist</span>}
+                {isOpen && <span>Activist</span>}
               </Link>
             </li>
             <li>
               <Link
                 to="/committee"
-                className="flex items-center p-2 rounded-md transition duration-300 hover:bg-white hover:text-[#762140]"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaRegBuilding className="w-4 h-4 mr-2" />
-                {isOpen && <span className="text-sm font-medium">Committee</span>}
+                {isOpen && <span>Committee</span>}
               </Link>
             </li>
           </ul>
+          {/* Logout Button */}
+          {isOpen && (
+            <div className="p-4">
+              <button
+                className="flex items-center justify-center w-full p-2 rounded-md bg-white text-[#762140] font-semibold shadow-md"
+                onClick={handleLogout}
+              >
+                <FaSignOutAlt className="w-4 h-4 mr-2" />
+                Logout
+              </button>
+            </div>
+          )}
         </nav>
-      </div>
-
-      {/* Logout Button */}
-      <div className="p-4">
-        <button
-          className="flex items-center justify-center w-full p-2 rounded-md bg-white text-[#762140] font-semibold shadow-md transition duration-300 hover:bg-[#a5526b] hover:text-white"
-          onClick={handleLogout}
-        >
-          <FaSignOutAlt className="w-4 h-4 mr-2" />
-          {isOpen && "Logout"}
-        </button>
       </div>
     </div>
   );

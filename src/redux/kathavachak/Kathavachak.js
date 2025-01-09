@@ -9,8 +9,6 @@ const loadInitialData = () => {
     { id: 3, name: "Alice Brown", age: 30, email: "alice@example.com",height:5.7,weight:70,complection:"fare" },
   ];
 };
-
-
 const initialState = loadInitialData();
 
 const kathavachakSlice = createSlice({

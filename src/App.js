@@ -14,6 +14,11 @@ import Userprofileupdate from "./updatecomponents/Userprofileupdate";
 import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
 import Adduser from "./components/adduser/Adduser";
 import User from "./components/Services/User";
+import AdminPanel from "./components/AdminPanel";
+import Kathavachak from "./components/Services/Kathavachak";
+import PanditServices from "./components/Services/PanditServices";
+import Jyotish from "./components/Services/Jyotish";
+import UploadPhoto from "./components/Services/UploadPhoto";
 
 
 const App = () => {
@@ -43,7 +48,7 @@ const App = () => {
         <Route path="/otp" element={<OTPVerification />} />
         {/* Protected Routes */}
         <Route element={<Protectedroutes/>}>
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/admin-panel" element={<AdminPanel />} />
           <Route path="/user-data" element={<Userslide1/>} />
           <Route path="/pandit" element={<Panditprofile/>}/>
           <Route path="/sub-admin" element={<Subadmis/>}/>
@@ -52,6 +57,13 @@ const App = () => {
           <Route path="/update-pandit" element={<Panditprofileupdate/>}/>
           <Route path="/add-user" element={<Adduser/>}/>
           <Route path="/user-form" element={<User/>}/>
+          <Route path="/user-form/pandit-services" element={<PanditServices/>}/>
+          <Route path="/user-form/kathavachak-services" element={<Kathavachak/>}/>
+          <Route path='/user-form/jyotish-services' element={<Jyotish/>}/>
+          <Route path="/user-form/photo-upload" element={<UploadPhoto/>}/>
+
+
+
 
           
         </Route>

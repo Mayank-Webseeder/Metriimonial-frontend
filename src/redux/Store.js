@@ -1,12 +1,14 @@
-// store.js
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./user/Userslice"  ; // Update the path to where your userSlice file is located
-import panditSlice from "./pandit/Panditslice"
+import userSlice from "./user/Userslice";
+import panditSlice from "./pandit/Panditslice";
+import commonFormSlice from "../redux/commonform/Commonfromslice";
+
 const store = configureStore({
   reducer: {
-           userdata:userSlice, 
-           panditData:panditSlice
-  },
+    userdata: userSlice,
+    panditData: panditSlice,
+    commonform: commonFormSlice // Updated key name
+  }
 });
 
 export default store;
