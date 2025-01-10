@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaTrash, FaEdit, FaEye,FaPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteUser } from "../redux/user/Userslice";
 
 function Userslide1() {
@@ -10,6 +10,7 @@ function Userslide1() {
   const [emailQuery, setEmailQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [selectedUser, setSelectedUser] = useState(null);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -56,6 +57,15 @@ function Userslide1() {
           Add User <FaPlus className="ml-2" />
         </button>
       </div>
+      <Link to='/user-form'><div className="mb-6 flex justify-between">
+        <button
+          onClick={() => navigate("/add-user")}
+          className="px-4 py-2 text-white bg-[#762140] hover:bg-green-600 rounded-md flex items-center space-x-2"
+        >
+            
+           User-Form <FaPlus className="ml-2" />
+        </button>
+      </div></Link>
 
       <div className="mb-6 grid grid-cols-2 gap-4">
         <input

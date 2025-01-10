@@ -9,8 +9,12 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineFeedback } from "react-icons/md";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { MdOutlineShortcut } from "react-icons/md";
+import { useSearchParams } from "react-router-dom";
 
 const AdminPanel = () => {
+
+  const pathName = useSearchParams()
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-pink-50">
       {/* Sidebar */}
