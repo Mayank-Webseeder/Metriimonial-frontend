@@ -46,7 +46,7 @@ const Kathavachak = () => {
               type="submit"
               className="bg-red-900 text-white py-2 px-8 rounded-lg hover:bg-red-500 transition mr-[68px]"
             >
-              Next
+              Submit
             </button>
           </div>
         </form>
