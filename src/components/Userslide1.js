@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaTrash, FaEdit, FaEye,FaPlus } from "react-icons/fa";
+import { FaTrash, FaEdit, FaEye, FaPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteUser } from "../redux/user/Userslice";
@@ -53,19 +53,19 @@ function Userslide1() {
           onClick={() => navigate("/add-user")}
           className="px-4 py-2 text-white bg-[#762140] hover:bg-green-600 rounded-md flex items-center space-x-2"
         >
-            
           Add User <FaPlus className="ml-2" />
         </button>
       </div>
-      <Link to='/user-form'><div className="mb-6 flex justify-between">
-        <button
-          onClick={() => navigate("/add-user")}
-          className="px-4 py-2 text-white bg-[#762140] hover:bg-green-600 rounded-md flex items-center space-x-2"
-        >
-            
-           User-Form <FaPlus className="ml-2" />
-        </button>
-      </div></Link>
+      <Link to="/user-form">
+        <div className="mb-6 flex justify-between">
+          <button
+            onClick={() => navigate("/add-user")}
+            className="px-4 py-2 text-white bg-[#762140] hover:bg-green-600 rounded-md flex items-center space-x-2"
+          >
+            User-Form <FaPlus className="ml-2" />
+          </button>
+        </div>
+      </Link>
 
       <div className="mb-6 grid grid-cols-2 gap-4">
         <input
@@ -92,7 +92,6 @@ function Userslide1() {
             <th className="p-4 border">Email</th>
             <th className="p-4 border">View Details</th>
             <th className="p-4 border">Actions</th>
-           
           </tr>
         </thead>
         <tbody>
@@ -131,7 +130,6 @@ function Userslide1() {
                   Delete
                 </button>
               </td>
-             
             </tr>
           ))}
         </tbody>

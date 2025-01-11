@@ -33,30 +33,35 @@ const LoginPage = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post("http://localhost:3600/api/v1/user/signIn", {
-          mobileNo: formData.number,
-          password: formData.password,
-        });
-  
+        const response = await axios.post(
+          "http://localhost:3600/api/v1/user/signIn",
+          {
+            mobileNo: formData.number,
+            password: formData.password,
+          }
+        );
+
         if (response.data.status) {
           // Store the entire response or specific fields in localStorage
           localStorage.setItem("loggedIn", true);
           localStorage.setItem("userInfo", JSON.stringify(response.data.user));
           localStorage.setItem("message", response.data.message);
-  
+
           // Redirect to the desired page
           navigate("/user-data");
         } else {
-          setErrors(response.data.message || "Invalid mobile number or password.");
+          setErrors(
+            response.data.message || "Invalid mobile number or password."
+          );
         }
       } catch (error) {
         setErrors(
-          error.response?.data?.message || "An error occurred while logging in. Please try again."
+          error.response?.data?.message ||
+            "An error occurred while logging in. Please try again."
         );
       }
     }
   };
-  
 
   return (
     <div
@@ -66,11 +71,15 @@ const LoginPage = () => {
       }}
     >
       <div className="w-full max-w-md bg-white bg-opacity-5 shadow-lg rounded-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">Welcome Back!</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
+          Welcome Back!
+        </h2>
         <p className="text-center text-white-900 mb-6">Log in to continue.</p>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Mobile Number</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Mobile Number
+            </label>
             <input
               type="number"
               name="number"
@@ -82,7 +91,9 @@ const LoginPage = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               name="password"
