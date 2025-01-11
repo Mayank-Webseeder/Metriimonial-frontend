@@ -12,8 +12,7 @@ import { MdOutlineShortcut } from "react-icons/md";
 import { useSearchParams } from "react-router-dom";
 
 const AdminPanel = () => {
-
-  const pathName = useSearchParams()
+  const pathName = useSearchParams();
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-pink-50">
@@ -24,12 +23,42 @@ const AdminPanel = () => {
         </div>
         <nav className="space-y-2">
           <ul>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]"><span><AiFillHome /></span>Dashboard</li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]"><span><FaUserShield /></span>Users</li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]"><span><FaUsers /></span>Pandits</li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]"><span><LuUsers /></span>Kathabachaks</li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]"><span><FaUsers /></span>Astrologers</li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]"><span><BiSupport /></span>Support</li>
+            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
+              <span>
+                <AiFillHome />
+              </span>
+              Dashboard
+            </li>
+            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
+              <span>
+                <FaUserShield />
+              </span>
+              Users
+            </li>
+            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
+              <span>
+                <FaUsers />
+              </span>
+              Pandits
+            </li>
+            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
+              <span>
+                <LuUsers />
+              </span>
+              Kathabachaks
+            </li>
+            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
+              <span>
+                <FaUsers />
+              </span>
+              Astrologers
+            </li>
+            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
+              <span>
+                <BiSupport />
+              </span>
+              Support
+            </li>
           </ul>
         </nav>
         <div className="p-6">
@@ -39,16 +68,36 @@ const AdminPanel = () => {
         </div>
         <nav className="p-4 space-y-2">
           <button className="block w-full text-left p-2 rounded hover:bg-pink-100">
-            <div className="flex items-center"><span><IoSettingsOutline /></span>Settings</div>
+            <div className="flex items-center">
+              <span>
+                <IoSettingsOutline />
+              </span>
+              Settings
+            </div>
           </button>
           <button className="block w-full text-left p-2 rounded hover:bg-pink-100">
-            <div className="flex items-center"><span><MdOutlineFeedback /></span>Feedback</div>
+            <div className="flex items-center">
+              <span>
+                <MdOutlineFeedback />
+              </span>
+              Feedback
+            </div>
           </button>
           <button className="block w-full text-left p-2 rounded hover:bg-pink-100">
-            <div className="flex items-center"><span><IoIosHelpCircleOutline /></span>Help</div>
+            <div className="flex items-center">
+              <span>
+                <IoIosHelpCircleOutline />
+              </span>
+              Help
+            </div>
           </button>
           <button className="block w-full text-left p-2 rounded hover:bg-pink-100">
-            <div className="flex items-center"><span><MdOutlineShortcut /></span>Shortcuts</div>
+            <div className="flex items-center">
+              <span>
+                <MdOutlineShortcut />
+              </span>
+              Shortcuts
+            </div>
           </button>
         </nav>
       </aside>

@@ -13,14 +13,15 @@ import Subadmis from "./components/Subadmis";
 import Userprofileupdate from "./updatecomponents/Userprofileupdate";
 import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
 import Adduser from "./components/adduser/Adduser";
+import User from "./components/Services/User";
+import AdminPanel from "./components/AdminPanel";
+import Kathavachak from "./components/Services/Kathavachak";
 import PanditServices from "./components/Services/PanditServices";
-import Kathavachak from "./components/Kathavachak";
-
-
+import Jyotish from "./components/Services/Jyotish";
+import UploadPhoto from "./components/Services/UploadPhoto";
 
 const App = () => {
   return (
-   
     // <div className="flex">
     //   {/* Sidebar */}
     //   {/* <Sidebar /> */}
@@ -38,33 +39,34 @@ const App = () => {
     //   </div>
     // </div>
 
-<Routes>
-        {/* Public Routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/otp" element={<OTPVerification />} />
-        {/* Protected Routes */}
-        <Route element={<Protectedroutes/>}>
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/user-data" element={<Userslide1/>} />
-          <Route path="/pandit" element={<Panditprofile/>}/>
-          <Route path="/sub-admin" element={<Subadmis/>}/>
-          <Route path="add-subadmin" element={<SubAdminUser/>}/>
-          <Route path="/update" element={<Userprofileupdate/>}/>
-          <Route path="/update-pandit" element={<Panditprofileupdate/>}/>
-          <Route path="/add-user" element={<Adduser/>}/>
-          <Route path="/pandit-user" element={<PanditServices/>}/>
-          <Route path="/kathavachak" element={<Kathavachak/>}/>
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/otp" element={<OTPVerification />} />
+      {/* Protected Routes */}
+      <Route element={<Protectedroutes />}>
+        <Route path="/admin-panel" element={<AdminPanel />} />
+        <Route path="/user-data" element={<Userslide1 />} />
+        <Route path="/pandit" element={<Panditprofile />} />
+        <Route path="/sub-admin" element={<Subadmis />} />
+        <Route path="add-subadmin" element={<SubAdminUser />} />
+        <Route path="/update" element={<Userprofileupdate />} />
+        <Route path="/update-pandit" element={<Panditprofileupdate />} />
+        <Route path="/add-user" element={<Adduser />} />
+        <Route path="/user-form" element={<User />} />
+        <Route path="/user-form/pandit-services" element={<PanditServices />} />
+        <Route
+          path="/user-form/kathavachak-services"
+          element={<Kathavachak />}
+        />
+        <Route path="/user-form/jyotish-services" element={<Jyotish />} />
+        <Route path="/user-form/photo-upload" element={<UploadPhoto />} />
+      </Route>
 
-          
-        </Route>
-
-        {/* Default Route (can be used to redirect users who are not authenticated) */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
-      </Routes>
-
-      
-   
+      {/* Default Route (can be used to redirect users who are not authenticated) */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
+    </Routes>
   );
 };
 

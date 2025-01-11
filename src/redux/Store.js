@@ -1,26 +1,14 @@
-// File: redux/store.js
-import { configureStore } from '@reduxjs/toolkit';
-import userSlice from "./user/Userslice"  ;
-import panditSlice from './pandit/Panditslice';
-import kathavachakSlice from './kathavachak/KathavachakSlice';
-
-// Middleware to save state to localStorage on every state change
-const saveStateMiddleware = (store) => (next) => (action) => {
-  const result = next(action);
-  const state = store.getState();
-  localStorage.setItem('pandits', JSON.stringify(state.pandits));
-  localStorage.setItem('kathavachaks', JSON.stringify(state.Kathavachaks));
-  return result;
-};
+import { configureStore } from "@reduxjs/toolkit";
+import userSlice from "./user/Userslice";
+import panditSlice from "./pandit/Panditslice";
+import commonFormSlice from "../redux/commonform/Commonfromslice";
 
 const store = configureStore({
   reducer: {
-    userdata:userSlice, 
-    pandits: panditSlice,
-    kathavachaks: kathavachakSlice,
+    userdata: userSlice,
+    panditData: panditSlice,
+    commonform: commonFormSlice, // Updated key name
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(saveStateMiddleware),
 });
 
 export default store;

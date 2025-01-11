@@ -33,10 +33,8 @@ function Adduser() {
       weight: parseInt(userData.weight, 10), // Convert weight to a number
     };
 
- 
     dispatch(addUser(newUser));
 
-  
     navigate("/user-data");
   };
 
@@ -85,7 +83,9 @@ function Adduser() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Complection</label>
+              <label className="block text-sm font-medium mb-2">
+                Complection
+              </label>
               <input
                 type="text"
                 name="complection"
@@ -100,7 +100,9 @@ function Adduser() {
           {/* Row 3: Height and Weight */}
           <div className="grid grid-cols-2 gap-6 mb-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Height (in feet)</label>
+              <label className="block text-sm font-medium mb-2">
+                Height (in feet)
+              </label>
               <input
                 type="number"
                 step="0.1"
@@ -112,7 +114,9 @@ function Adduser() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Weight (in kg)</label>
+              <label className="block text-sm font-medium mb-2">
+                Weight (in kg)
+              </label>
               <input
                 type="number"
                 name="weight"

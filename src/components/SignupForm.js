@@ -1,75 +1,89 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignupForm = () => {
-  const [userData, setUserData] = useState({
-    mobileNo: "",
+  const [formData, setFormData] = useState({
     username: "",
-    dob: "",
-    city: "",
+    mobileNo: "",
     gender: "",
     password: "",
+    confirmPassword: "",
+    otp: "",
+    // dob: '',
+    city: "",
   });
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [mobileError, setMobileError] = useState('');
-  const [loading, setLoading] = useState(false); // Loader state
+  const [mobileError, setMobileError] = useState("");
+  // const [loading, setLoading] = useState(false); // Loader state
+  const navigate = useNavigate();
+  // Handle input changes
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
 
- // Handle input changes
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setUserData((prev) => ({ ...prev, [name]: value }));
-
-  // Real-time validation for mobile number
-  if (name === 'mobileNo') {
-    if (!/^\d{10}$/.test(value)) {
-      setMobileError('Enter a valid 10-digit mobile number');
-    } else {
-      setMobileError('');
+    // Real-time validation and OTP API trigger for mobile number
+    if (name === "mobileNo") {
+      if (!/^\d{10}$/.test(value)) {
+        setMobileError("Enter a valid 10-digit mobile number");
+      } else {
+        setMobileError("");
+        // setLoading(true); // Start loading spinner
+        // try {
+        //   const response = await axios.post(
+        //     'opt api',
+        //     { mobileNo: value }
+        //   );
+        //   setLoading(false); // Stop loading spinner
+        //   alert('OTP sent successfully!');
+        // } catch (error) {
+        //   setLoading(false); // Stop loading spinner
+        //   setMessage({
+        //     type: 'error',
+        //     text: error.response?.data?.message || 'Failed to send OTP!',
+        //   });
+        // }
+      }
     }
-  }
-};
+  };
 
-// Handle form submission
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // Check if passwords match
-  if (userData.password !== userData.confirmPassword) {
-    setMessage({ type: 'error', text: 'Passwords do not match!' });
-    return;
-  }
+    if (formData.password !== formData.confirmPassword) {
+      setMessage({ type: "error", text: "Passwords do not match!" });
+      return;
+    }
 
-  try {
-    const { confirmPassword, ...dataToSend } = userData; // Exclude confirmPassword
-    const response = await axios.post(
-      'http://localhost:3600/api/v1/user/signUp',
-      dataToSend
-    );
-    setMessage({
-      type: 'success',
-      text: response.data.message || 'Signup successful!',
-    });
-
-    // Reset form
-    setUserData({
-      username: '',   
-      mobileNo: '',
-      gender: '',
-      password: '',
-      confirmPassword: '',
-      dob: '',
-      city: '',
-    });
-  } catch (error) {
-    setMessage({
-      type: 'error',
-      text: error.response?.data?.message || 'Signup failed!',
-    });
-  }
- };
-  
+    try {
+      const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword
+      const response = await axios.post(
+        "http://localhost:3600/api/v1/user/signUp",
+        dataToSend
+      );
+      setMessage({
+        type: "success",
+        text: response.data.message || "Signup successful!",
+      });
+      setFormData({
+        username: "",
+        mobileNo: "",
+        gender: "",
+        password: "",
+        confirmPassword: "",
+        otp: "",
+        dob: "",
+        city: "",
+      });
+      navigate("/login");
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text: error.response?.data?.message || "Signup failed!",
+      });
+    }
+  };
 
   return (
     <div
@@ -92,7 +106,7 @@ const handleSubmit = async (e) => {
                   <input
                     type="text"
                     name="username"
-                    value={userData.username}
+                    value={formData.username}
                     onChange={handleChange}
                     placeholder="Enter your name"
                     className="mt-1 p-2 w-full border rounded-md"
@@ -103,7 +117,7 @@ const handleSubmit = async (e) => {
                   <input
                     type="text"
                     name="city"
-                    value={userData.city}
+                    value={formData.city}
                     onChange={handleChange}
                     placeholder="Enter your city"
                     className="mt-1 p-2 w-full border rounded-md"
@@ -117,7 +131,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="tel"
                   name="mobileNo"
-                  value={userData.mobileNo}
+                  value={formData.mobileNo}
                   onChange={handleChange}
                   placeholder="Enter your phone number"
                   className="mt-1 p-2 w-full border rounded-md"
@@ -125,23 +139,23 @@ const handleSubmit = async (e) => {
                 {mobileError && (
                   <p className="text-red-600 text-sm mt-1">{mobileError}</p>
                 )}
-                {loading && (
+                {/* {loading && (
                   <p className="text-blue-600 text-sm mt-1">Sending OTP...</p>
-                )}
+                )} */}
               </div>
 
               {/* OTP Field */}
-              <div className="mt-2">
+              {/* <div className="mt-2">
                 <label className="block text-gray-700">OTP</label>
                 <input
                   type="text"
                   name="otp"
-                  value={userData.otp}
+                  value={formData.otp}
                   onChange={handleChange}
                   placeholder="Enter OTP"
                   className="mt-1 p-2 w-full border rounded-md"
                 />
-              </div>
+              </div> */}
 
               {/* Password and Confirm Password */}
               <div className="flex gap-4 mt-2">
@@ -150,18 +164,20 @@ const handleSubmit = async (e) => {
                   <input
                     type="password"
                     name="password"
-                    value={userData.password}
+                    value={formData.password}
                     onChange={handleChange}
                     placeholder="Create a password"
                     className="mt-1 p-2 w-full border rounded-md"
                   />
                 </div>
                 <div className="w-1/2">
-                  <label className="block text-gray-700">Confirm Password</label>
+                  <label className="block text-gray-700">
+                    Confirm Password
+                  </label>
                   <input
                     type="password"
                     name="confirmPassword"
-                    value={userData.confirmPassword}
+                    value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="Confirm password"
                     className="mt-1 p-2 w-full border rounded-md"
@@ -175,7 +191,7 @@ const handleSubmit = async (e) => {
                   <label className="block text-gray-700">Gender</label>
                   <select
                     name="gender"
-                    value={userData.gender}
+                    value={formData.gender}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border rounded-md"
                   >
@@ -190,7 +206,7 @@ const handleSubmit = async (e) => {
                   <input
                     type="date"
                     name="dob"
-                    value={userData.dob}
+                    value={formData.dob}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border rounded-md"
                   />
@@ -210,9 +226,9 @@ const handleSubmit = async (e) => {
             {message && (
               <div
                 className={`mt-4 p-2 text-center ${
-                  message.type === 'success'
-                    ? 'text-green-700 bg-green-100'
-                    : 'text-red-700 bg-red-100'
+                  message.type === "success"
+                    ? "text-green-700 bg-green-100"
+                    : "text-red-700 bg-red-100"
                 }`}
               >
                 {message.text}
@@ -223,7 +239,7 @@ const handleSubmit = async (e) => {
             <div className="mt-2 text-center">
               <p className="text-sm text-white-900">
                 <b>
-                  Have an account?{' '}
+                  Have an account?{" "}
                   <Link to="/login" className="text-indigo-600 hover:underline">
                     Login Here
                   </Link>

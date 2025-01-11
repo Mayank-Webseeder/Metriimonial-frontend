@@ -3,11 +3,37 @@ import { createSlice } from "@reduxjs/toolkit";
 // Load initial data from localStorage or set default data
 const loadInitialData = () => {
   const data = localStorage.getItem("users");
-  return data ? JSON.parse(data) : [
-    { id: 1, name: "John Doe", age: 28, email: "john@example.com",height:5.7,weight:70,complection:"fare" },
-    { id: 2, name: "Jane Smith", age: 25, email: "jane@example.com",height:5.7,weight:70,complection:"fare" },
-    { id: 3, name: "Alice Brown", age: 30, email: "alice@example.com",height:5.7,weight:70,complection:"fare" },
-  ];
+  return data
+    ? JSON.parse(data)
+    : [
+        {
+          id: 1,
+          name: "John Doe",
+          age: 28,
+          email: "john@example.com",
+          height: 5.7,
+          weight: 70,
+          complection: "fare",
+        },
+        {
+          id: 2,
+          name: "Jane Smith",
+          age: 25,
+          email: "jane@example.com",
+          height: 5.7,
+          weight: 70,
+          complection: "fare",
+        },
+        {
+          id: 3,
+          name: "Alice Brown",
+          age: 30,
+          email: "alice@example.com",
+          height: 5.7,
+          weight: 70,
+          complection: "fare",
+        },
+      ];
 };
 const initialState = loadInitialData();
 
@@ -34,5 +60,6 @@ const kathavachakSlice = createSlice({
   },
 });
 
-export const { addKathavachak, updateKathavachak, deleteKathavachak } = kathavachakSlice.actions;
+export const { addKathavachak, updateKathavachak, deleteKathavachak } =
+  kathavachakSlice.actions;
 export default kathavachakSlice.reducer;
