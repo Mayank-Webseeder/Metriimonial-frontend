@@ -20,6 +20,8 @@ import PanditServices from "./components/Services/PanditServices";
 import Jyotish from "./components/Services/Jyotish";
 import UploadPhoto from "./components/Services/UploadPhoto";
 import PersonalDetailsForm from "./components/PersonalDetailsForm";
+import NewsEvents from "./components/NewsEvents";
+
 
 
 const App = () => {
@@ -56,6 +58,7 @@ const App = () => {
         <Route path="add-subadmin" element={<SubAdminUser />} />
         <Route path="/update" element={<Userprofileupdate />} />
         <Route path="/update-pandit" element={<Panditprofileupdate />} />
+        <Route path="//event-news" element={<NewsEvents/>} />
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-form" element={<User />} />
         <Route path="/user-form/pandit-services" element={<PanditServices />} />

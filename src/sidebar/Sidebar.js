@@ -11,6 +11,7 @@ import {
   FaRegBuilding,
   FaBars,
   FaTimes,
+  FaNewspaper
 } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -126,6 +127,15 @@ const Sidebar = () => {
               >
                 <FaRegBuilding className="w-4 h-4 mr-2" />
                 {isOpen && <span>Committee</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/event-news"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaNewspaper className="w-4 h-4 mr-2" />
+                {isOpen && <span>Events/News</span>}
               </Link>
             </li>
           </ul>
