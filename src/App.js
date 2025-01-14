@@ -21,6 +21,7 @@ import Jyotish from "./components/Services/Jyotish";
 import UploadPhoto from "./components/Services/UploadPhoto";
 import PersonalDetailsForm from "./components/PersonalDetailsForm";
 import NewsEvents from "./components/NewsEvents";
+import KathavachakProfile from "./components/KathavachakProfile"
 
 
 
@@ -62,6 +63,8 @@ const App = () => {
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-form" element={<User />} />
         <Route path="/user-form/pandit-services" element={<PanditServices />} />
+        <Route path="/kathavachak-profile" element={<KathavachakProfile/>} />
+        
         <Route
           path="/user-form/kathavachak-services"
           element={<Kathavachak />}
