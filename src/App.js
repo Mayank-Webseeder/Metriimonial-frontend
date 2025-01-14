@@ -22,6 +22,8 @@ import UploadPhoto from "./components/Services/UploadPhoto";
 import PersonalDetailsForm from "./components/PersonalDetailsForm";
 import NewsEvents from "./components/NewsEvents";
 import KathavachakProfile from "./components/KathavachakProfile"
+import AstrologerProfile from "./components/AstrologerProfile";
+
 
 
 
@@ -64,6 +66,7 @@ const App = () => {
         <Route path="/user-form" element={<User />} />
         <Route path="/user-form/pandit-services" element={<PanditServices />} />
         <Route path="/kathavachak-profile" element={<KathavachakProfile/>} />
+        <Route path="/astrologer-profile" element={<AstrologerProfile/>} />
         
         <Route
           path="/user-form/kathavachak-services"
