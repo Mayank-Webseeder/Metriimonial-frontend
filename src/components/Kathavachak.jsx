@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addKathavachak, editKathavachak, deleteKathavachak } from '../redux/kathavachak/KathavachakSlice';
 
-const Kathavachak = () => {
+const KathavachakProfile = () => {
   const dispatch = useDispatch();
 
   // UseSelector with correct key and fallback for undefined state
-  const kathavachaks = useSelector((state) => state.kathavachaks.kathavachaks || []);
+  const kathavachaks = useSelector((state) => state.kathavachaks?.kathavachaks || []);
+  console.log(kathavachaks);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [ageFilter, setAgeFilter] = useState('');
@@ -70,7 +71,9 @@ const Kathavachak = () => {
 
   // Handle delete action
   const handleDelete = (id) => {
-    dispatch(deleteKathavachak(id));
+    if (window.confirm('Are you sure you want to delete this profile?')) {
+      dispatch(deleteKathavachak(id));
+    }
   };
 
   return (
@@ -204,4 +207,4 @@ const Kathavachak = () => {
   );
 };
 
-export default Kathavachak;
+export default KathavachakProfile;
