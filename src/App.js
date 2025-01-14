@@ -15,13 +15,13 @@ import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
 import Adduser from "./components/adduser/Adduser";
 import User from "./components/Services/User";
 import AdminPanel from "./components/AdminPanel";
-import KathavachakServices from "./components/Services/KathavachakServices";
+import Kathavachak from "./components/Services/Kathavachak";
 import PanditServices from "./components/Services/PanditServices";
 import Jyotish from "./components/Services/Jyotish";
 import UploadPhoto from "./components/Services/UploadPhoto";
 import PersonalDetailsForm from "./components/PersonalDetailsForm";
 import NewsEvents from "./components/NewsEvents";
-import KathavachakProfile from "./components/KathavachakProfile";
+
 
 
 const App = () => {
@@ -64,11 +64,7 @@ const App = () => {
         <Route path="/user-form/pandit-services" element={<PanditServices />} />
         <Route
           path="/user-form/kathavachak-services"
-          element={<KathavachakServices/>}
-        />
-        <Route
-          path="/kathavachak"
-          element={<KathavachakProfile/>}
+          element={<Kathavachak />}
         />
         <Route path="/user-form/jyotish-services" element={<Jyotish />} />
         <Route path="/user-form/photo-upload" element={<UploadPhoto />} />
