@@ -104,7 +104,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/astrologer"
+                to="/astrologer-profile"
                 className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaStar className="w-4 h-4 mr-2" />

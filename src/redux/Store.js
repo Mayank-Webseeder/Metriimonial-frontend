@@ -3,6 +3,8 @@ import userSlice from "./user/Userslice";
 import panditSlice from "./pandit/Panditslice";
 import commonFormSlice from "../redux/commonform/Commonfromslice";
 import KathavachakSlice from "./kathavachak/KathavachakSlice";
+import AstrologerSlice from "../redux/Astrologer/AstrologerSlice";
+
 
 
 const store = configureStore({
@@ -10,7 +12,8 @@ const store = configureStore({
     userdata: userSlice,
     panditData: panditSlice,
     kathavachaks:KathavachakSlice,
-    commonform: commonFormSlice, // Updated key name
+    Astrologer:AstrologerSlice,
+    commonform: commonFormSlice, 
   },
 });
 
