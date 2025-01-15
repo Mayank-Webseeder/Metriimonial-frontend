@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteUser } from "../redux/user/Userslice";
 
-function Userslide1() {
+function UserManagement() {
   const users = useSelector((state) => state.userdata);
   const [nameQuery, setNameQuery] = useState("");
   const [emailQuery, setEmailQuery] = useState("");
@@ -174,4 +174,4 @@ function Userslide1() {
   );
 }
 
-export default Userslide1;
+export default UserManagement;
