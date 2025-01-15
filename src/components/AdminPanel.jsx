@@ -21,46 +21,6 @@ const AdminPanel = () => {
         <div className="p-6">
           <h1 className="text-xl font-bold text-gray-800">Admin Panel</h1>
         </div>
-        <nav className="space-y-2">
-          <ul>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
-              <span>
-                <AiFillHome />
-              </span>
-              Dashboard
-            </li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
-              <span>
-                <FaUserShield />
-              </span>
-              Users
-            </li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
-              <span>
-                <FaUsers />
-              </span>
-              Pandits
-            </li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
-              <span>
-                <LuUsers />
-              </span>
-              Kathabachaks
-            </li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
-              <span>
-                <FaUsers />
-              </span>
-              Astrologers
-            </li>
-            <li className="p-4 hover:bg-pink-100 cursor-pointer flex items-center ml-2 mt-[3px]">
-              <span>
-                <BiSupport />
-              </span>
-              Support
-            </li>
-          </ul>
-        </nav>
         <div className="p-6">
           <button className="w-full py-2 px-4 bg-pink-500 text-white rounded-lg">
             New User
