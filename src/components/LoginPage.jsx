@@ -43,10 +43,11 @@ const LoginPage = () => {
 
         if (response.data.status) {
           // Store the entire response or specific fields in localStorage
+          localStorage.setItem("authToken", response.data.user.token);
           localStorage.setItem("loggedIn", true);
           localStorage.setItem("userInfo", JSON.stringify(response.data.user));
           localStorage.setItem("message", response.data.message);
-
+          console.log(response.data.user.token);
           // Redirect to the desired page
           navigate("/user-data");
         } else {
