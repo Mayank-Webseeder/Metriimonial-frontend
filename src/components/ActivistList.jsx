@@ -43,6 +43,7 @@ const ActivistList = () => {
       setShowNotFound(true);
     }
     setFilterOpen(false);
+    setShowNotFound(false);
   };
 
   return (
