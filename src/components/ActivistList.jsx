@@ -41,9 +41,10 @@ const ActivistList = () => {
   const handleApplyFilters = () => {
     if (filteredActivists.length === 0) {
       setShowNotFound(true);
+    } else {
+      setShowNotFound(false);
     }
     setFilterOpen(false);
-    setShowNotFound(false);
   };
 
   return (
@@ -64,7 +65,7 @@ const ActivistList = () => {
           Be an Activist
         </button>
       </div>
-      {/* {showNotFound && <p className="text-red-500">User Not Found</p>} */}
+      {showNotFound && <p className="text-red-500">User Not Found</p>}
       {!filterOpen && !formOpen && filteredActivists.map((activist, index) => (
         <div key={index} className="flex items-center p-4 border rounded-lg mb-4">
           <img src={activist.image} alt={activist.name} className="w-12 h-12 rounded-full mr-4" />
@@ -95,7 +96,11 @@ const ActivistList = () => {
               onChange={(e) => setSearchLocality(e.target.value)}
             />
             <div className="flex justify-between">
-              <button className="bg-[#7d0245] text-white px-4 py-2 rounded-md" onClick={handleApplyFilters}>
+              <button
+                className={`bg-[#7d0245] text-white px-4 py-2 rounded-md ${filteredActivists.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={handleApplyFilters}
+                disabled={filteredActivists.length === 0}
+              >
                 Apply Filters
               </button>
               <button className="bg-red-700 text-white px-4 py-2 rounded-md" onClick={() => {
@@ -132,8 +137,12 @@ const ActivistList = () => {
             </div>
             <label className="block mb-2">Profile Picture</label>
             <input type="file" className="w-full p-2 border rounded-md mb-4" onChange={handleFileUpload} />
-            <button className="bg-[#7d0245] text-white w-full py-2 rounded-md" onClick={handleSubmit}>Submit</button>
-            <button className="absolute top-2 right-2 text-gray-500" onClick={() => setFormOpen(false)}>X</button>
+            <button className="bg-[#7d0245] text-white w-full py-2 rounded-md" onClick={handleSubmit}>
+              Submit
+            </button>
+            <button className="absolute top-2 right-2 text-gray-500" onClick={() => setFormOpen(false)}>
+              X
+            </button>
           </div>
         </div>
       )}
