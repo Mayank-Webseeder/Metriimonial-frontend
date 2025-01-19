@@ -113,7 +113,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/activist"
+                to="/activist-list"
                 className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
               >
                 <FaHandshake className="w-4 h-4 mr-2" />
@@ -136,6 +136,15 @@ const Sidebar = () => {
               >
                 <FaNewspaper className="w-4 h-4 mr-2" />
                 {isOpen && <span>Events/News</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/feedback"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaNewspaper className="w-4 h-4 mr-2" />
+                {isOpen && <span>Feedback</span>}
               </Link>
             </li>
           </ul>
