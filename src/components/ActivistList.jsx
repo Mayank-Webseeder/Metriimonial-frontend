@@ -63,7 +63,7 @@ const ActivistList = () => {
           Be an Activist
         </button>
       </div>
-      {showNotFound && <p className="text-red-500">User Not Found</p>}
+      {/* {showNotFound && <p className="text-red-500">User Not Found</p>} */}
       {!filterOpen && !formOpen && filteredActivists.map((activist, index) => (
         <div key={index} className="flex items-center p-4 border rounded-lg mb-4">
           <img src={activist.image} alt={activist.name} className="w-12 h-12 rounded-full mr-4" />
