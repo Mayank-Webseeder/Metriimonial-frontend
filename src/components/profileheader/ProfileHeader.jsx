@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DetailInfo from '../Services/detailinfo/DetailInfo';
 import PreferenceForm from '../Services/preferenceform/PreferenceForm';
+import PersonalDetailsForm from '../PersonalDetailsForm';
 // import DetailInfo from './DetailInfo';
 // import PartnerPreference from './PartnerPreference';
 
@@ -49,7 +50,7 @@ const ProfileHeader = () => {
 
             {/* Conditional Rendering of Components */}
             <div className="mt-12">
-                {activeTab === 'detailInfo' && <DetailInfo />}
+                {activeTab === 'detailInfo' && <PersonalDetailsForm />}
                 {activeTab === 'partnerPreference' && <PreferenceForm />}
             </div>
         </div>
