@@ -162,9 +162,9 @@ const User = () => {
   };
 
   return (
-    <div className="bg-red-200 min-h-screen flex items-center justify-center p-6">
+    <div className="bg-gray-80 min-h-screen flex items-center justify-center p-6">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-3xl">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">User Details Form</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">User Register Form</h1>
 
         <form onSubmit={handleSubmit}>
           {/* Name and Contact Number */}
@@ -284,7 +284,7 @@ const User = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-red-900 text-white py-2 px-4 rounded-lg"
+            className="w-full bg-[#762140] text-white py-2 px-4 rounded-lg"
           >
             Next
           </button>
