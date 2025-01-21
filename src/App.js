@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Sidebar from "./sidebar/Sidebar"; // Match exact casing
+// import Sidebar from "./sidebar/Sidebar"; // Match exact casing
 import UserManagement from "./components/UserManagement";
 import Panditprofile from "./components/Panditprofile";
 import LoginPage from "./components/LoginPage";
@@ -12,18 +12,19 @@ import Userprofileupdate from "./updatecomponents/Userprofileupdate";
 import Panditprofileupdate from "./updatecomponents/Panditprofileupdate";
 import Adduser from "./components/adduser/Adduser";
 import User from "./components/Services/User";
-import AdminPanel from "./components/AdminPanel";
 import Kathavachak from "./components/Services/Kathavachak";
 import PanditServices from "./components/Services/PanditServices";
 import Jyotish from "./components/Services/Jyotish";
 import UploadPhoto from "./components/Services/UploadPhoto";
 import PersonalDetailsForm from "./components/PersonalDetailsForm";
 import NewsEvents from "./components/NewsEvents";
-import KathavachakProfile from "./components/KathavachakProfile"
+import KathavachakProfile from "./components/KathavachakProfile";
 import AstrologerProfile from "./components/AstrologerProfile";
-
-
-
+import ProfilePage from "./components/profile/ProfilePage";
+import ProfileHeader from "./components/profileheader/ProfileHeader";
+import AdminPanel from "./components/AdminPanel";
+import CommitteeActivistPage from "./components/committeeactivist/CommitteeActivistPage";
+import DharmshalaPage from "./components/dharmshala/DharmshalaPage";
 
 const App = () => {
   return (
@@ -50,28 +51,28 @@ const App = () => {
       <Route path="/signup" element={<SignupPage />} />
       {/* Protected Routes */}
       <Route element={<Protectedroutes />}>
-        <Route path="/admin-panel" element={<AdminPanel />} />
+        <Route path="/admin-dashboard" element={<AdminPanel />} />
         <Route path="/user-data" element={<UserManagement />} />
-        <Route path="/personal-details" element={<PersonalDetailsForm/>}/>
+        <Route path="/personal-details" element={<PersonalDetailsForm />} />
         <Route path="/pandit" element={<Panditprofile />} />
         <Route path="/sub-admin" element={<Subadmin />} />
         <Route path="/add-subadmin" element={<AddSubAdmin />} />
         <Route path="/update" element={<Userprofileupdate />} />
         <Route path="/update-pandit" element={<Panditprofileupdate />} />
-        <Route path="/event-news" element={<NewsEvents/>} />
+        <Route path="/news&events" element={<NewsEvents />} />
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-form" element={<User />} />
         <Route path="/user-form/pandit-services" element={<PanditServices />} />
-        <Route path="/kathavachak-profile" element={<KathavachakProfile/>} />
-        <Route path="/astrologer-profile" element={<AstrologerProfile/>} />
-        
-        <Route
-          path="/user-form/kathavachak-services"
-          element={<Kathavachak />}
-        />
+        <Route path="/kathavachak-profile" element={<KathavachakProfile />} />
+        <Route path="/astrologer-profile" element={<AstrologerProfile />} />
+        <Route path="/profile-page" element={<ProfilePage />} />
+        <Route path="/profile-header" element={<ProfileHeader />} />
+        <Route path="/committee-activist" element={<CommitteeActivistPage />} />
+        <Route path="/dharm-shala" element={<DharmshalaPage />} />
+
+        <Route path="/user-form/kathavachak-services"element={<Kathavachak />}/>
         <Route path="/user-form/jyotish-services" element={<Jyotish />} />
         <Route path="/user-form/photo-upload" element={<UploadPhoto />} />
-        
       </Route>
 
       {/* Default Route (can be used to redirect users who are not authenticated) */}
