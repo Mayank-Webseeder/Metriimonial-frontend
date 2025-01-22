@@ -15,6 +15,7 @@ import {
   FaNewspaper
 } from "react-icons/fa";
 
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -88,7 +89,11 @@ const Sidebar = () => {
               { path: "/astrologer-profile", label: "Astrologer", icon: <FaStar /> },
               { path: "/committee-activist", label: "Activist & Committee", icon: <FaHandshake /> },
               { path: "/dharm-shala", label: "Dharamshala", icon: <FaHotel /> },
-              { path: "/news&events", label: "News & Events", icon: <FaNewspaper /> }
+              { path: "/news&events", label: "News & Events", icon: <FaNewspaper /> },
+              { path: "/home-page", label: "Home", icon: <FaHome /> },
+              { path: "/success-story", label: "Success Story", icon: < FaStar  /> }
+
+
               ,
             ].map((item, index) => (
               <li key={index}>

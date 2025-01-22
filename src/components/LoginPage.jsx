@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginPage = () => {
@@ -119,13 +119,13 @@ const LoginPage = () => {
           <p className="text-sm text-white-900">
             <b>
               Don't have an account?{" "}
-              <a
-                href="/signup"
+              <Link
+                to="/signup"
                 className="text-indigo-600 hover:underline"
                 onClick={goSignup}
               >
                 Sign Up
-              </a>
+              </Link>
             </b>
           </p>
         </div>

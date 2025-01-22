@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import DetailInfo from '../Services/detailinfo/DetailInfo';
 import PreferenceForm from '../Services/preferenceform/PreferenceForm';
 import PersonalDetailsForm from '../PersonalDetailsForm';
 // import DetailInfo from './DetailInfo';
@@ -13,13 +12,13 @@ const ProfileHeader = () => {
             {/* Background Image */}
             <div className="relative">
                 <img
-                    src="https://via.placeholder.com/600x300"
+                    src="/ProfileImage.png"
                     alt="Cover"
                     className="w-full h-60 object-cover rounded-lg"
                 />
                 {/* Profile Picture */}
                 <img
-                    src="https://via.placeholder.com/150"
+                    src="/ProfileImage.png"
                     alt="Profile"
                     className="w-48 h-48 rounded-full border-4 border-white absolute -bottom-24 left-1/2 transform -translate-x-1/2"
                 />

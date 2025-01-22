@@ -5,10 +5,10 @@ const CommitteeActivistPage = () => {
   const [cityFilter, setCityFilter] = useState('');
   const [subCasteFilter, setSubCasteFilter] = useState('');
   const committeeData = [
-    { name: 'Vineshkumarji group', city: 'Indore', subCaste: 'Sub-caste A', area: 'area', image: 'https://via.placeholder.com/80' },
-    { name: 'Vineshkumarji group', city: 'Bhopal', subCaste: 'Sub-caste B', area: 'area', image: 'https://via.placeholder.com/80' },
-    { name: 'Vineshkumarji group', city: 'Indore', subCaste: 'Sub-caste A', area: 'area', image: 'https://via.placeholder.com/80' },
-    { name: 'Vineshkumarji group', city: 'city', subCaste: '', area: 'area', image: 'https://via.placeholder.com/80' }
+    { name: 'Vineshkumarji group', city: 'Indore', subCaste: 'Sub-caste A', area: 'area', image: '/MatrimonialProfile.png' },
+    { name: 'Vineshkumarji group', city: 'Bhopal', subCaste: 'Sub-caste B', area: 'area', image: '/MatrimonialProfile.png' },
+    { name: 'Vineshkumarji group', city: 'Indore', subCaste: 'Sub-caste A', area: 'area', image: '/MatrimonialProfile.png' },
+    { name: 'Vineshkumarji group', city: 'city', subCaste: '', area: 'area', image: '/MatrimonialProfile.png' }
   ];
 
   // Filter logic

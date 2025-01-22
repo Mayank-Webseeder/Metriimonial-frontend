@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FaTrash } from "react-icons/fa";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -10,44 +11,43 @@ const SignupForm = () => {
     password: "",
     confirmPassword: "",
     otp: "",
-    // dob: '',
+    dob: "",
     city: "",
+    photo: null, // Added for photo upload
   });
+  const [photoPreview, setPhotoPreview] = useState(null); // Preview of the uploaded image
   const [message, setMessage] = useState(null);
   const [mobileError, setMobileError] = useState("");
-  // const [loading, setLoading] = useState(false); // Loader state
+
   const navigate = useNavigate();
-  // Handle input changes
+
   const handleChange = async (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Real-time validation and OTP API trigger for mobile number
+    // Real-time validation for mobile number
     if (name === "mobileNo") {
       if (!/^\d{10}$/.test(value)) {
         setMobileError("Enter a valid 10-digit mobile number");
       } else {
         setMobileError("");
-        // setLoading(true); // Start loading spinner
-        // try {
-        //   const response = await axios.post(
-        //     'opt api',
-        //     { mobileNo: value }
-        //   );
-        //   setLoading(false); // Stop loading spinner
-        //   alert('OTP sent successfully!');
-        // } catch (error) {
-        //   setLoading(false); // Stop loading spinner
-        //   setMessage({
-        //     type: 'error',
-        //     text: error.response?.data?.message || 'Failed to send OTP!',
-        //   });
-        // }
       }
     }
   };
 
-  // Handle form submission
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({ ...prev, photo: file }));
+      setPhotoPreview(URL.createObjectURL(file)); // Generate a preview URL for the image
+    }
+  };
+
+  const handleDeletePhoto = () => {
+    setFormData((prev) => ({ ...prev, photo: null }));
+    setPhotoPreview(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,10 +58,19 @@ const SignupForm = () => {
 
     try {
       const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword
+      const formDataToSend = new FormData();
+      Object.keys(dataToSend).forEach((key) => {
+        if (dataToSend[key]) {
+          formDataToSend.append(key, dataToSend[key]);
+        }
+      });
+
       const response = await axios.post(
-        "http://localhost:3600/api/v1/user/signUp",
-        dataToSend
+        "https://api-matrimonial.webseeder.tech/api/v1/user/signUp",
+        formDataToSend,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
+
       setMessage({
         type: "success",
         text: response.data.message || "Signup successful!",
@@ -75,7 +84,9 @@ const SignupForm = () => {
         otp: "",
         dob: "",
         city: "",
+        photo: null,
       });
+      setPhotoPreview(null);
       navigate("/login");
     } catch (error) {
       setMessage({
@@ -139,23 +150,7 @@ const SignupForm = () => {
                 {mobileError && (
                   <p className="text-red-600 text-sm mt-1">{mobileError}</p>
                 )}
-                {/* {loading && (
-                  <p className="text-blue-600 text-sm mt-1">Sending OTP...</p>
-                )} */}
               </div>
-
-              {/* OTP Field */}
-              {/* <div className="mt-2">
-                <label className="block text-gray-700">OTP</label>
-                <input
-                  type="text"
-                  name="otp"
-                  value={formData.otp}
-                  onChange={handleChange}
-                  placeholder="Enter OTP"
-                  className="mt-1 p-2 w-full border rounded-md"
-                />
-              </div> */}
 
               {/* Password and Confirm Password */}
               <div className="flex gap-4 mt-2">
@@ -171,7 +166,7 @@ const SignupForm = () => {
                   />
                 </div>
                 <div className="w-1/2">
-                  <label className="block text-gray-700">
+                  <label className="block  text-gray-700">
                     Confirm Password
                   </label>
                   <input
@@ -211,6 +206,36 @@ const SignupForm = () => {
                     className="mt-1 p-2 w-full border rounded-md"
                   />
                 </div>
+              </div>
+
+              {/* Photo Upload */}
+
+              <div className="mt-4">
+                <label className="block colour-[#7F7F7F]" htmlFor="photoInput">Upload Picture</label>
+                <input
+                placeholder="Upload Picture"
+                  id="photoInput"
+                  type="file"
+                  accept="image/*"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  onChange={handlePhotoUpload}
+                />
+                {photoPreview && (
+                  <div className="mt-2 flex items-center gap-4">
+                    <img
+                      src={photoPreview}
+                      alt="Uploaded Preview"
+                      className="w-12 h-10 object-cover rounded-md"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleDeletePhoto}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      <i className="fas fa-trash-alt"></i><FaTrash/>
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Submit Button */}
