@@ -9,17 +9,20 @@ const SignupForm = () => {
     gender: "",
     password: "",
     confirmPassword: "",
-    otp: "",
-    // dob: '',
+    //otp: "",
+    dob: '',
     city: "",
+    photoUrl: "",
   });
   const [message, setMessage] = useState(null);
   const [mobileError, setMobileError] = useState("");
+
   // const [loading, setLoading] = useState(false); // Loader state
   const navigate = useNavigate();
+
   // Handle input changes
   const handleChange = async (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
     // Real-time validation and OTP API trigger for mobile number
@@ -47,35 +50,58 @@ const SignupForm = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Convert the selected file to Base64
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setFormData({ ...formData, photoUrl: reader.result });
+      };
+    }
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (formData.password !== formData.confirmPassword) {
       setMessage({ type: "error", text: "Passwords do not match!" });
       return;
     }
-
+  
     try {
       const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword
+      
+      // Send the data as JSON
       const response = await axios.post(
-        "http://localhost:3600/api/v1/user/signUp",
-        dataToSend
+        `${process.env.REACT_APP_BASE_URL}/user/signUp`,
+        dataToSend,  // No need to convert to FormData since we're using JSON
+        {
+          headers: {
+            "Content-Type": "application/json", // Set content type to application/json
+          },
+        }
       );
+  
       setMessage({
         type: "success",
         text: response.data.message || "Signup successful!",
       });
+  
+      // Reset form state
       setFormData({
         username: "",
         mobileNo: "",
         gender: "",
         password: "",
         confirmPassword: "",
-        otp: "",
         dob: "",
         city: "",
+        photoUrl: "",
       });
+  
       navigate("/login");
     } catch (error) {
       setMessage({
@@ -84,6 +110,7 @@ const SignupForm = () => {
       });
     }
   };
+  
 
   return (
     <div
@@ -212,7 +239,16 @@ const SignupForm = () => {
                   />
                 </div>
               </div>
-
+              <div className="mt-2">
+                <label className="block text-gray-700">Profile Picture</label>
+                <input
+                  type="file"
+                  name="photoUrl"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  className="mt-1 p-2 w-full border rounded-md"
+                />
+              </div>
               {/* Submit Button */}
               <button
                 type="submit"
@@ -225,11 +261,10 @@ const SignupForm = () => {
             {/* Message Display */}
             {message && (
               <div
-                className={`mt-4 p-2 text-center ${
-                  message.type === "success"
+                className={`mt-4 p-2 text-center ${message.type === "success"
                     ? "text-green-700 bg-green-100"
                     : "text-red-700 bg-red-100"
-                }`}
+                  }`}
               >
                 {message.text}
               </div>
