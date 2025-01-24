@@ -20,28 +20,17 @@ import PersonalDetailsForm from "./components/PersonalDetailsForm";
 import NewsEvents from "./components/NewsEvents";
 import KathavachakProfile from "./components/KathavachakProfile";
 import AstrologerProfile from "./components/AstrologerProfile";
-<<<<<<< HEAD
 import Feedback from "./components/Feedback";
 import ActivistList from "./components/ActivistList";
 import SavedProfiles from "./components/SavedProfiles";
 import SavedPandit from "./components/SavedPandit";
 import SavedDharmashala from "./components/SavedDharmashala";
 import SavedCommitie from "./components/SavedCommitie";
-
-
-
-
-
-
-
-
-=======
 import ProfilePage from "./components/profile/ProfilePage";
 import ProfileHeader from "./components/profileheader/ProfileHeader";
 import AdminPanel from "./components/AdminPanel";
 import CommitteeActivistPage from "./components/committeeactivist/CommitteeActivistPage";
 import DharmshalaPage from "./components/dharmshala/DharmshalaPage";
->>>>>>> 766ef9163924927498d567fe870cb5db6851496a
 
 const App = () => {
   return (
@@ -80,7 +69,6 @@ const App = () => {
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-form" element={<User />} />
         <Route path="/user-form/pandit-services" element={<PanditServices />} />
-<<<<<<< HEAD
         <Route path="/kathavachak-profile" element={<KathavachakProfile/>} />
         <Route path="/astrologer-profile" element={<AstrologerProfile/>} />
         <Route path="/feedback" element={<Feedback/>} />
@@ -88,14 +76,11 @@ const App = () => {
         <Route path="/saved-profiles" element={<SavedProfiles/>} />
         <Route path="/saved-pandit" element={<SavedPandit/>} />
         <Route path="/saved-dharmashala" element={<SavedDharmashala/>} />
-        <Route path="/saved-commitie" element={<SavedCommitie/>} />
-        
-        
+        <Route path="/saved-commitie" element={<SavedCommitie/>} /> 
         <Route
           path="/user-form/kathavachak-services"
           element={<Kathavachak />}
         />
-=======
         <Route path="/kathavachak-profile" element={<KathavachakProfile />} />
         <Route path="/astrologer-profile" element={<AstrologerProfile />} />
         <Route path="/profile-page" element={<ProfilePage />} />
@@ -104,7 +89,6 @@ const App = () => {
         <Route path="/dharm-shala" element={<DharmshalaPage />} />
 
         <Route path="/user-form/kathavachak-services"element={<Kathavachak />}/>
->>>>>>> 766ef9163924927498d567fe870cb5db6851496a
         <Route path="/user-form/jyotish-services" element={<Jyotish />} />
         <Route path="/user-form/photo-upload" element={<UploadPhoto />} />
       </Route>
@@ -115,4 +99,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App;

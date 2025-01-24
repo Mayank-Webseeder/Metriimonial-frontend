@@ -12,7 +12,8 @@ import {
   FaHotel,
   FaBars,
   FaTimes,
-  FaNewspaper
+  FaNewspaper,
+  FaRegBuilding
 } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -77,7 +78,7 @@ const Sidebar = () => {
         {/* Navigation Menu */}
         <nav>
           <ul className="space-y-2 mt-4">
-<<<<<<< HEAD
+
             <li>
               <Link
                 to="/user-data"
@@ -193,7 +194,7 @@ const Sidebar = () => {
                 </Link>
               </li>
             ))}
->>>>>>> 766ef9163924927498d567fe870cb5db6851496a
+
           </ul>
         </nav>
 
