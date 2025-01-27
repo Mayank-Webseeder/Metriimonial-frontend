@@ -12,7 +12,8 @@ import {
   FaHotel,
   FaBars,
   FaTimes,
-  FaNewspaper
+  FaNewspaper,
+  FaRegBuilding
 } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -77,6 +78,98 @@ const Sidebar = () => {
         {/* Navigation Menu */}
         <nav>
           <ul className="space-y-2 mt-4">
+
+            <li>
+              <Link
+                to="/user-data"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaUserAlt className="w-4 h-4 mr-2" />
+                {isOpen && <span>User Details</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/saved-profiles"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaUserAlt className="w-4 h-4 mr-2" />
+                {isOpen && <span>Saved Profile</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/sub-admin"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaUsers className="w-4 h-4 mr-2" />
+                {isOpen && <span>Sub-Admin</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/pandit"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaBook className="w-4 h-4 mr-2" />
+                {isOpen && <span>Pandit Profile</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/kathavachak-profile"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaUserCircle className="w-4 h-4 mr-2" />
+                {isOpen && <span>Kathavachak</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/astrologer-profile"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaStar className="w-4 h-4 mr-2" />
+                {isOpen && <span>Astrologer</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/activist-list"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaHandshake className="w-4 h-4 mr-2" />
+                {isOpen && <span>Activist</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/committee"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaRegBuilding className="w-4 h-4 mr-2" />
+                {isOpen && <span>Committee</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/event-news"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaNewspaper className="w-4 h-4 mr-2" />
+                {isOpen && <span>Events/News</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/feedback"
+                className="flex items-center p-2 hover:bg-white hover:text-[#762140]"
+              >
+                <FaNewspaper className="w-4 h-4 mr-2" />
+                {isOpen && <span>Feedback</span>}
+              </Link>
+            </li>
+=======
             {[
               { path: "/profile-page", label: "Profile", icon: <FaUserAlt /> },
 
@@ -101,6 +194,7 @@ const Sidebar = () => {
                 </Link>
               </li>
             ))}
+
           </ul>
         </nav>
 
