@@ -30,8 +30,8 @@ const PreferenceForm = () => {
     partnerFamilyType: "",
     partnerFamilyFinancialStatus: "",
     partnerFamilyIncome: "",
-     partnerIncome: "",
-     partnerCity:"pune"
+    partnerIncome: "",
+    partnerCity: "pune",
   });
 
   const [loading, setLoading] = useState(false);
@@ -42,15 +42,23 @@ const PreferenceForm = () => {
     const { name, value } = e.target; // Extracting name and value from the event object
 
     setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-        // Correctly updating partnerIncome when min or max income changes
-        partnerIncome:
-            name === "partnerMinimumIncome" || name === "partnerMaximumIncome"
-                ? `${name === "partnerMinimumIncome" ? value : prevData.partnerMinimumIncome} - ${name === "partnerMaximumIncome" ? value : prevData.partnerMaximumIncome}`
-                : prevData.partnerIncome
+      ...prevData,
+      [name]: value,
+      // Correctly updating partnerIncome when min or max income changes
+      partnerIncome:
+        name === "partnerMinimumIncome" || name === "partnerMaximumIncome"
+          ? `${
+              name === "partnerMinimumIncome"
+                ? value
+                : prevData.partnerMinimumIncome
+            } - ${
+              name === "partnerMaximumIncome"
+                ? value
+                : prevData.partnerMaximumIncome
+            }`
+          : prevData.partnerIncome,
     }));
-};
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +93,17 @@ const PreferenceForm = () => {
   };
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md">
-      <h1 className="text-2xl font-bold mb-6 text-center">Preferences</h1>
+        <div className="relative">
+        <h1 className="text-2xl font-bold mb-6 text-center">Preferences</h1>
+        {/* Edit button */}
+        <button
+          className="absolute top-0 right-0 text-lg text-black-500 hover:text-[#762140]"
+          onClick={() => console.log("Edit clicked")}
+        >
+          Edit
+        </button>
+      </div>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Subcaste Field */}
         <div>
@@ -93,6 +111,7 @@ const PreferenceForm = () => {
             Subcaste
           </label>
           <select
+          required
             name="partnerSubCaste"
             id="partnerSubCaste"
             className="w-full p-2 border border-gray-300 rounded"
@@ -114,6 +133,7 @@ const PreferenceForm = () => {
               Minimum Age
             </label>
             <select
+              required
               name="partnerMinAge"
               id="partnerMinAge"
               className="w-full p-2 border border-gray-300 rounded"
@@ -133,6 +153,7 @@ const PreferenceForm = () => {
               Maximum Age
             </label>
             <select
+              required
               name="partnerMaxAge"
               id="partnerMaxAge"
               className="w-full p-2 border border-gray-300 rounded"
@@ -156,6 +177,7 @@ const PreferenceForm = () => {
               Minimum Height (FT)
             </label>
             <select
+              required
               name="partnerMinHeightFeet"
               id="partnerMinHeightFeet"
               className="w-full p-2 border border-gray-300 rounded"
@@ -175,6 +197,7 @@ const PreferenceForm = () => {
               Maximum Height (FT)
             </label>
             <select
+              required
               name="partnerMaxHeightFeet"
               id="partnerMaxHeightFeet"
               className="w-full p-2 border border-gray-300 rounded"
@@ -198,6 +221,7 @@ const PreferenceForm = () => {
               Minimum Weight (kg)
             </label>
             <select
+              required
               name="partnerMinWeight"
               id="partnerMinWeight"
               className="w-full p-2 border border-gray-300 rounded"
@@ -217,6 +241,7 @@ const PreferenceForm = () => {
               Maximum Weight (kg)
             </label>
             <select
+              required
               name="partnerMaxWeight"
               id="partnerMaxWeight"
               className="w-full p-2 border border-gray-300 rounded"
@@ -239,6 +264,7 @@ const PreferenceForm = () => {
             Partner's Marital Status
           </label>
           <select
+            required
             name="partnerMaritalStatus"
             id="partnerMaritalStatus"
             className="w-full p-2 border border-gray-300 rounded"
@@ -258,6 +284,7 @@ const PreferenceForm = () => {
               Minimum Income (INR)
             </label>
             <select
+              required
               name="partnerMinimumIncome"
               id="partnerMinimumIncome"
               className="w-full p-2 border border-gray-300 rounded"
@@ -279,6 +306,7 @@ const PreferenceForm = () => {
               Maximum Income (INR)
             </label>
             <select
+              required
               name="partnerMaximumIncome"
               id="partnerMaximumIncome"
               className="w-full p-2 border border-gray-300 rounded"
@@ -303,6 +331,7 @@ const PreferenceForm = () => {
             Occupation
           </label>
           <select
+            required
             name="partnerOccupation"
             id="partnerOccupation"
             className="w-full p-2 border border-gray-300 rounded"
@@ -323,6 +352,7 @@ const PreferenceForm = () => {
             Qualification
           </label>
           <select
+            required
             name="partnerQualification"
             id="partnerQualification"
             className="w-full p-2 border border-gray-300 rounded"
@@ -343,6 +373,7 @@ const PreferenceForm = () => {
             Disabilities(Physical/mental)
           </label>
           <select
+            required
             name="partnerDisabilities"
             id="partnerDisabilities"
             className="w-full p-2 border border-gray-300 rounded"
@@ -361,6 +392,7 @@ const PreferenceForm = () => {
             Manglik Status
           </label>
           <select
+            required
             name="partnerManglikStatus"
             id="partnerManglikStatus"
             className="w-full p-2 border border-gray-300 rounded"
@@ -379,6 +411,7 @@ const PreferenceForm = () => {
             Partners Livein
           </label>
           <select
+            required
             name="partnersLivingStatus"
             id="partnersLivingStatus"
             className="w-full p-2 border border-gray-300 rounded"
@@ -410,6 +443,7 @@ const PreferenceForm = () => {
            
           </select> */}
           <input
+            required
             type="text"
             name="partnerDistrict"
             id="partnerDistrict"
@@ -425,6 +459,7 @@ const PreferenceForm = () => {
             State
           </label>
           <select
+            required
             name="partnerState"
             id="partnerState"
             className="w-full p-2 border border-gray-300 rounded"
@@ -442,6 +477,7 @@ const PreferenceForm = () => {
             Village
           </label>
           <select
+            required
             name="partnerVillage"
             id="partnerVillage"
             className="w-full p-2 border border-gray-300 rounded"
@@ -459,6 +495,7 @@ const PreferenceForm = () => {
             Partners Body Structure
           </label>
           <select
+            required
             name="partnerBodyStructure"
             id="partnerBodyStructure"
             className="w-full p-2 border border-gray-300 rounded"
@@ -478,6 +515,7 @@ const PreferenceForm = () => {
             Complexion
           </label>
           <select
+            required
             name="partnerComplexion"
             id="partnerComplexion"
             className="w-full p-2 border border-gray-300 rounded"
@@ -497,6 +535,7 @@ const PreferenceForm = () => {
             Partners Dietary Habits
           </label>
           <select
+            required
             name="partnerDietaryHabits"
             id="partnerDietaryHabits"
             className="w-full p-2 border border-gray-300 rounded"
@@ -516,6 +555,7 @@ const PreferenceForm = () => {
             Smoking Habits
           </label>
           <select
+            required
             name="partnerSmokingHabits"
             id="partnerSmokingHabits"
             className="w-full p-2 border border-gray-300 rounded"
@@ -534,6 +574,7 @@ const PreferenceForm = () => {
             Drinking Habits
           </label>
           <select
+            required
             name="partnerDrinkingHabits"
             id="partnerDrinkingHabits"
             className="w-full p-2 border border-gray-300 rounded"
@@ -555,6 +596,7 @@ const PreferenceForm = () => {
             Family Type
           </label>
           <select
+            required
             name="partnerFamilyType"
             id="partnerFamilyType"
             className="w-full p-2 border border-gray-300 rounded"
@@ -577,6 +619,7 @@ const PreferenceForm = () => {
             Family Financial Status
           </label>
           <select
+            required
             name="partnerFamilyFinancialStatus"
             id="partnerFamilyFinancialStatus"
             className="w-full p-2 border border-gray-300 rounded"
@@ -597,6 +640,7 @@ const PreferenceForm = () => {
             Family Income
           </label>
           <select
+            required
             name="partnerFamilyIncome"
             id="partnerFamilyIncome"
             className="w-full p-2 border border-gray-300 rounded"
@@ -618,6 +662,7 @@ const PreferenceForm = () => {
             Expectation from Partner
           </label>
           <textarea
+            required
             name="partnerExpectations"
             id="partnerExpectations"
             rows="4"

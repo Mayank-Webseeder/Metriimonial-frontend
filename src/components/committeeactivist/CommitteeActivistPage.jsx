@@ -5,10 +5,10 @@ const CommitteeActivistPage = () => {
   const [cityFilter, setCityFilter] = useState('');
   const [subCasteFilter, setSubCasteFilter] = useState('');
   const committeeData = [
-    { name: 'Vineshkumarji group', city: 'Indore', subCaste: 'Sub-caste A', area: 'area', image: 'https://via.placeholder.com/80' },
-    { name: 'Vineshkumarji group', city: 'Bhopal', subCaste: 'Sub-caste B', area: 'area', image: 'https://via.placeholder.com/80' },
-    { name: 'Vineshkumarji group', city: 'Indore', subCaste: 'Sub-caste A', area: 'area', image: 'https://via.placeholder.com/80' },
-    { name: 'Vineshkumarji group', city: 'city', subCaste: '', area: 'area', image: 'https://via.placeholder.com/80' }
+    { name: 'Vineshkumarji group', city: 'Indore', subCaste: 'Sub-caste A', area: 'area', image: '/MatrimonialProfile.png' },
+    { name: 'Vineshkumarji group', city: 'Bhopal', subCaste: 'Sub-caste B', area: 'area', image: '/MatrimonialProfile.png' },
+    { name: 'Vineshkumarji group', city: 'Indore', subCaste: 'Sub-caste A', area: 'area', image: '/MatrimonialProfile.png' },
+    { name: 'Vineshkumarji group', city: 'city', subCaste: '', area: 'area', image: '/MatrimonialProfile.png' }
   ];
 
   // Filter logic
@@ -37,7 +37,7 @@ const CommitteeActivistPage = () => {
           <option value="Sub-caste A">Sub-caste A</option>
           <option value="Sub-caste B">Sub-caste B</option>
         </select>
-       <Link to='/upload'> <button className="border px-4 py-2 rounded text-white bg-[#762140]">Upload</button></Link>
+       <Link to='/committee-activist/upload'> <button className="border px-4 py-2 rounded text-white bg-[#762140]">Upload</button></Link>
       </div>
 
       {/* Committee Cards Section */}

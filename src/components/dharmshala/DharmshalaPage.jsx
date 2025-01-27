@@ -13,21 +13,21 @@ const DharmshalaPage = () => {
             location: 'Indore',
             phone: '+911234567890',
             cast: 'Brahmin',
-            image: '/images/dharmshala1.jpg'
+            image: '/DharmShala.jpg'
         },
         {
             name: 'Hotel Royal Indore',
             location: 'Indore',
             phone: '+919876543210',
             cast: 'Kshatriya',
-            image: '/images/dharmshala2.jpg'
+            image: '/DharmShala.jpg'
         },
         {
             name: 'Hotel Mahakaleshwar',
             location: 'Ujjain',
             phone: '+917654321098',
             cast: 'Vaishya',
-            image: '/images/dharmshala3.jpg'
+            image: '/DharmShala.jpg'
         }
     ];
 
@@ -58,7 +58,7 @@ const DharmshalaPage = () => {
                     onChange={(e) => setFilterCity(e.target.value)}
                 />
 
-                <Link to='/add-dharmshala'><button className="bg-[#762140] text-white px-4 py-2 rounded">Upload</button></Link>
+                <Link to='/dharma-shala/upload'><button className="bg-[#762140] text-white px-4 py-2 rounded">Upload</button></Link>
             </div>
 
             {/* Cards Section */}

@@ -28,9 +28,17 @@ import SavedDharmashala from "./components/SavedDharmashala";
 import SavedCommitie from "./components/SavedCommitie";
 import ProfilePage from "./components/profile/ProfilePage";
 import ProfileHeader from "./components/profileheader/ProfileHeader";
-import AdminPanel from "./components/AdminPanel";
+// import AdminPanel from "./components/AdminPanel";
 import CommitteeActivistPage from "./components/committeeactivist/CommitteeActivistPage";
 import DharmshalaPage from "./components/dharmshala/DharmshalaPage";
+import HomePage from "./components/Homepage";
+import MatrimonialProfiles from "./components/MatrimonialProfiles";
+import SuccessStories from "./components/SuccessStories";
+import PostSuccessStory from "./components/PostSuccessStory";
+import Dashboard from "./components/Dashboard";
+import DharamshalaForm from "./components/dharmshala/DharamshalaForm";
+import UpdateProfile from "./components/updateprofiles/UpdateProfile";
+import CommitteeForm from "./components/committeeactivist/CommitteeForm";
 
 const App = () => {
   return (
@@ -57,7 +65,7 @@ const App = () => {
       <Route path="/signup" element={<SignupPage />} />
       {/* Protected Routes */}
       <Route element={<Protectedroutes />}>
-        <Route path="/admin-dashboard" element={<AdminPanel />} />
+        <Route path="/admin-dashboard" element={<Dashboard />} />
         <Route path="/user-data" element={<UserManagement />} />
         <Route path="/personal-details" element={<PersonalDetailsForm />} />
         <Route path="/pandit" element={<Panditprofile />} />
@@ -91,6 +99,18 @@ const App = () => {
         <Route path="/user-form/kathavachak-services"element={<Kathavachak />}/>
         <Route path="/user-form/jyotish-services" element={<Jyotish />} />
         <Route path="/user-form/photo-upload" element={<UploadPhoto />} />
+        <Route path="/home-page" element={<HomePage />} />
+        <Route path="/home/matrimonialprofiles" element={<MatrimonialProfiles />} />
+        <Route path="/success-story" element={<SuccessStories />} />
+        <Route path="/success-story/post" element={<PostSuccessStory />} />
+        <Route path="/dharma-shala/upload" element={<DharamshalaForm />} />
+        <Route path="/committee-activist/upload" element={<CommitteeForm />} />
+
+        <Route path="/profile-page/edit-profile" element={<UpdateProfile />} />
+
+
+
+
       </Route>
 
       {/* Default Route (can be used to redirect users who are not authenticated) */}
