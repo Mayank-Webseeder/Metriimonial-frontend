@@ -53,8 +53,8 @@ const SuccessStories = () => {
               loading="lazy"
               src={story.image}
               alt={story.title}
-              className=" w-3/4 max-w-md rounded mt-2"
-              style={{marginLeft:"420px"}}
+              className=" w-3/4 max-w-md rounded mt-1"
+              style={{marginLeft:"10px"}}
              
             />
             <div className="p-4">

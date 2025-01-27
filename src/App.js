@@ -32,6 +32,7 @@ import PostSuccessStory from "./components/PostSuccessStory";
 import Dashboard from "./components/Dashboard";
 import DharamshalaForm from "./components/dharmshala/DharamshalaForm";
 import UpdateProfile from "./components/updateprofiles/UpdateProfile";
+import CommitteeForm from "./components/committeeactivist/CommitteeForm";
 
 const App = () => {
   return (
@@ -85,6 +86,8 @@ const App = () => {
         <Route path="/success-story" element={<SuccessStories />} />
         <Route path="/success-story/post" element={<PostSuccessStory />} />
         <Route path="/dharma-shala/upload" element={<DharamshalaForm />} />
+        <Route path="/committee-activist/upload" element={<CommitteeForm />} />
+
         <Route path="/profile-page/edit-profile" element={<UpdateProfile />} />
 
 

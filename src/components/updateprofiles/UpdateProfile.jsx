@@ -8,15 +8,48 @@ const UpdateProfile = () => {
     city: "",
     gender: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); // Clear errors as user types
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
+
+    if (!formData.username.trim()) {
+      newErrors.username = "Username is required.";
+      isValid = false;
+    }
+    if (!formData.mobileNo || !/^\d{10}$/.test(formData.mobileNo)) {
+      newErrors.mobileNo = "Mobile number must be a 10-digit number.";
+      isValid = false;
+    }
+    if (!formData.dob) {
+      newErrors.dob = "Date of birth is required.";
+      isValid = false;
+    }
+    if (!formData.city.trim()) {
+      newErrors.city = "City is required.";
+      isValid = false;
+    }
+    if (!formData.gender) {
+      newErrors.gender = "Please select a gender.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add your API call here to update the profile
+    if (validateForm()) {
+      console.log("Form submitted:", formData);
+      // Add your API call here to update the profile
+    }
   };
 
   return (
@@ -52,8 +85,13 @@ const UpdateProfile = () => {
               value={formData.username}
               onChange={handleChange}
               placeholder="Enter your name"
-              className="w-full border rounded-md p-2 mt-1 focus:outline-none focus:ring-[#762140] focus:border-[#762140]"
+              className={`w-full border rounded-md p-2 mt-1 focus:outline-none ${
+                errors.username ? "border-red-500" : "focus:ring-[#762140] focus:border-[#762140]"
+              }`}
             />
+            {errors.username && (
+              <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+            )}
           </div>
 
           {/* Mobile Number */}
@@ -65,14 +103,19 @@ const UpdateProfile = () => {
               Mobile Number
             </label>
             <input
-              type="tel"
+              type="number"
               id="mobileNo"
               name="mobileNo"
               value={formData.mobileNo}
               onChange={handleChange}
               placeholder="Enter your mobile number"
-              className="w-full border rounded-md p-2 mt-1 focus:outline-none focus:ring-[#762140] focus:border-[#762140]"
+              className={`w-full border rounded-md p-2 mt-1 focus:outline-none ${
+                errors.mobileNo ? "border-red-500" : "focus:ring-[#762140] focus:border-[#762140]"
+              }`}
             />
+            {errors.mobileNo && (
+              <p className="text-red-500 text-sm mt-1">{errors.mobileNo}</p>
+            )}
           </div>
 
           {/* Date of Birth */}
@@ -89,8 +132,13 @@ const UpdateProfile = () => {
               name="dob"
               value={formData.dob}
               onChange={handleChange}
-              className="w-full border rounded-md p-2 mt-1 focus:outline-none focus:ring-[#762140] focus:border-[#762140]"
+              className={`w-full border rounded-md p-2 mt-1 focus:outline-none ${
+                errors.dob ? "border-red-500" : "focus:ring-[#762140] focus:border-[#762140]"
+              }`}
             />
+            {errors.dob && (
+              <p className="text-red-500 text-sm mt-1">{errors.dob}</p>
+            )}
           </div>
 
           {/* City */}
@@ -108,8 +156,13 @@ const UpdateProfile = () => {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter your city"
-              className="w-full border rounded-md p-2 mt-1 focus:outline-none focus:ring-[#762140] focus:border-[#762140]"
+              className={`w-full border rounded-md p-2 mt-1 focus:outline-none ${
+                errors.city ? "border-red-500" : "focus:ring-[#762140] focus:border-[#762140]"
+              }`}
             />
+            {errors.city && (
+              <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+            )}
           </div>
 
           {/* Gender */}
@@ -139,6 +192,9 @@ const UpdateProfile = () => {
                 </label>
               ))}
             </div>
+            {errors.gender && (
+              <p className="text-red-500 text-sm mt-1">{errors.gender}</p>
+            )}
           </div>
 
           {/* Submit Button */}

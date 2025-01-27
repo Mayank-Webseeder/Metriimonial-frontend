@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <div className="bg-white font-sans">
       {/* Header Section */}
-      <header className="flex items-center justify-between p-4 bg-pink-100 shadow-md">
+      <header className="flex items-center justify-between p-3.5 bg-pink-100 shadow-md">
         <button className="text-xl">
           <i className="fas fa-bars"></i>
         </button>
@@ -51,9 +51,9 @@ const HomePage = () => {
 
       {/* Matrimony Section */}
       <section className="mt-4 p-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold" >Matrimony</h2>
-          <Link to="/home/matrimonialprofiles" className='p-2 rounded-lg' style={{ color: 'white',backgroundColor:"#762140" }}>View All</Link>
+        <div className="flex items-center justify-between bg-gray-100 rounded-md">
+          <h2 className="text-lg font-bold ml-2" >Matrimony</h2>
+          <Link to="/home/matrimonialprofiles" className='p-2 rounded-lg mr-1' style={{ color: 'white',backgroundColor:"#762140" }}>View All</Link>
         </div>
         <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-3">
           <img src="/MatrimonialProfile.png" alt="Profile 1" className="rounded shadow-md" />
@@ -63,8 +63,8 @@ const HomePage = () => {
       </section>
 
       {/* Pandit / Jyotish / Kathavachak Section */}
-      <section className="mt-4 p-4 bg-gray-100">
-        <h2 className="text-lg font-bold" style={{textAlign:"center"}} >Pandit / Jyotish / Kathavachak</h2>
+      <section className="mt-4 p-4">
+        <h2 className="text-lg font-bold bg-gray-100 p-2 rounded-md" style={{textAlign:"center"}} >Pandit / Jyotish / Kathavachak</h2>
         <div className="grid grid-cols-3 gap-4 mt-2">
           <div className="flex flex-col items-center">
             <img src="/Pandit.jpg" alt="Pandit" className="w-16 h-16" />
@@ -83,7 +83,7 @@ const HomePage = () => {
 
       {/* Brahmin Community Section */}
       <section className="mt-4 p-4" >
-        <h2 className="text-lg font-bold" style={{textAlign:"center"}}>Brahmin Community</h2>
+        <h2 className="text-lg font-bold  bg-gray-100 p-2 rounded-md" style={{textAlign:"center"}}>Brahmin Community</h2>
         <div className="grid grid-cols-3 gap-4 mt-2">
           <div className="flex flex-col items-center">
             <img src="/DharmshalaHome.jpg" alt="Dharmshala" className="w-16 h-16" />
@@ -91,7 +91,7 @@ const HomePage = () => {
           </div>
           <div className="flex flex-col items-center">
             <img src="/Events&News.jpg" alt="Event" className="w-16 h-16" />
-            <Link to='news&events'><span className="text-sm font-bold">Event & News</span></Link>
+            <Link to='/news&events'><span className="text-sm font-bold">Event & News</span></Link>
           </div>
           <div className="flex flex-col items-center">
             <img src="/Committee.jpg" alt="Committee" className="w-16 h-16" />

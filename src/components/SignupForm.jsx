@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -13,24 +13,40 @@ const SignupForm = () => {
     otp: "",
     dob: "",
     city: "",
-    photo: null, // Added for photo upload
+    photo: null,
   });
-  const [photoPreview, setPhotoPreview] = useState(null); // Preview of the uploaded image
+  const [photoPreview, setPhotoPreview] = useState(null);
   const [message, setMessage] = useState(null);
   const [mobileError, setMobileError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleChange = async (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Real-time validation for mobile number
+    // Validation for mobile number
     if (name === "mobileNo") {
       if (!/^\d{10}$/.test(value)) {
         setMobileError("Enter a valid 10-digit mobile number");
       } else {
         setMobileError("");
+      }
+    }
+
+    // Validation for password
+    if (name === "password") {
+      const passwordRegex =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(value)) {
+        setPasswordError(
+          "Password must be Strong, include uppercase,special character and numbers."
+        );
+      } else {
+        setPasswordError("");
       }
     }
   };
@@ -39,7 +55,7 @@ const SignupForm = () => {
     const file = e.target.files[0];
     if (file) {
       setFormData((prev) => ({ ...prev, photo: file }));
-      setPhotoPreview(URL.createObjectURL(file)); // Generate a preview URL for the image
+      setPhotoPreview(URL.createObjectURL(file));
     }
   };
 
@@ -56,8 +72,16 @@ const SignupForm = () => {
       return;
     }
 
+    if (mobileError || passwordError) {
+      setMessage({
+        type: "error",
+        text: "Please fix the errors before submitting.",
+      });
+      return;
+    }
+
     try {
-      const { confirmPassword, ...dataToSend } = formData; // Exclude confirmPassword
+      const { confirmPassword, ...dataToSend } = formData;
       const formDataToSend = new FormData();
       Object.keys(dataToSend).forEach((key) => {
         if (dataToSend[key]) {
@@ -98,7 +122,7 @@ const SignupForm = () => {
 
   return (
     <div
-      className="signup-form bg-cover bg-center h-screen"
+      className="signup-form bg-cover bg-center h-screen flex items-center justify-center"
       style={{
         backgroundImage: `url('https://www.shutterstock.com/image-photo/designer-wedding-rings-corner-on-260nw-741451888.jpg')`,
       }}
@@ -110,7 +134,6 @@ const SignupForm = () => {
               Sign Up
             </h3>
             <form onSubmit={handleSubmit}>
-              {/* Name and City Side by Side */}
               <div className="flex gap-4">
                 <div className="w-1/2">
                   <label className="block text-gray-700">Name</label>
@@ -120,6 +143,7 @@ const SignupForm = () => {
                     value={formData.username}
                     onChange={handleChange}
                     placeholder="Enter your name"
+                    required
                     className="mt-1 p-2 w-full border rounded-md"
                   />
                 </div>
@@ -131,12 +155,12 @@ const SignupForm = () => {
                     value={formData.city}
                     onChange={handleChange}
                     placeholder="Enter your city"
+                    required
                     className="mt-1 p-2 w-full border rounded-md"
                   />
                 </div>
               </div>
 
-              {/* Mobile Number */}
               <div className="mt-2">
                 <label className="block text-gray-700">Phone Number</label>
                 <input
@@ -145,6 +169,7 @@ const SignupForm = () => {
                   value={formData.mobileNo}
                   onChange={handleChange}
                   placeholder="Enter your phone number"
+                  required
                   className="mt-1 p-2 w-full border rounded-md"
                 />
                 {mobileError && (
@@ -152,35 +177,50 @@ const SignupForm = () => {
                 )}
               </div>
 
-              {/* Password and Confirm Password */}
               <div className="flex gap-4 mt-2">
-                <div className="w-1/2">
+                <div className="w-1/2 relative">
                   <label className="block text-gray-700">Password</label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="Create a password"
+                    required
                     className="mt-1 p-2 w-full border rounded-md"
                   />
+                  <span
+                    className="absolute right-3 top-9 cursor-pointer"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? <FaEye /> :<FaEyeSlash />  }
+                  </span>
+                  {passwordError && (
+                    <p className="text-red-600 text-sm mt-1">{passwordError}</p>
+                  )}
                 </div>
-                <div className="w-1/2">
-                  <label className="block  text-gray-700">
-                    Confirm Password
-                  </label>
+                <div className="w-1/2 relative">
+                  <label className="block text-gray-700">Confirm Password</label>
                   <input
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="Confirm password"
+                    required
                     className="mt-1 p-2 w-full border rounded-md"
                   />
+                  <span
+                    className="absolute right-3 top-9 cursor-pointer"
+                    onClick={() =>
+                      setShowConfirmPassword((prev) => !prev)
+                    }
+                  >
+                    {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
+                  </span>
                 </div>
               </div>
 
-              {/* Gender and DOB */}
               <div className="flex gap-4 mt-2">
                 <div className="w-1/2">
                   <label className="block text-gray-700">Gender</label>
@@ -188,6 +228,7 @@ const SignupForm = () => {
                     name="gender"
                     value={formData.gender}
                     onChange={handleChange}
+                    required
                     className="mt-1 p-2 w-full border rounded-md"
                   >
                     <option value="">Select Gender</option>
@@ -203,22 +244,23 @@ const SignupForm = () => {
                     name="dob"
                     value={formData.dob}
                     onChange={handleChange}
+                    required
                     className="mt-1 p-2 w-full border rounded-md"
                   />
                 </div>
               </div>
 
-              {/* Photo Upload */}
-
               <div className="mt-4">
-                <label className="block colour-[#7F7F7F]" htmlFor="photoInput">Upload Picture</label>
+                <label className="block text-gray-700" htmlFor="photoInput">
+                  Upload Picture
+                </label>
                 <input
-                placeholder="Upload Picture"
                   id="photoInput"
                   type="file"
                   accept="image/*"
                   className="mt-1 p-2 w-full border rounded-md"
                   onChange={handlePhotoUpload}
+                  required
                 />
                 {photoPreview && (
                   <div className="mt-2 flex items-center gap-4">
@@ -232,13 +274,12 @@ const SignupForm = () => {
                       onClick={handleDeletePhoto}
                       className="text-red-500 hover:text-red-700"
                     >
-                      <i className="fas fa-trash-alt"></i><FaTrash/>
+                      <FaTrash />
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 className="w-full bg-red-900 text-white p-2 hover:bg-red-700 rounded-md mt-4"
@@ -247,7 +288,6 @@ const SignupForm = () => {
               </button>
             </form>
 
-            {/* Message Display */}
             {message && (
               <div
                 className={`mt-4 p-2 text-center ${
@@ -260,7 +300,6 @@ const SignupForm = () => {
               </div>
             )}
 
-            {/* Redirect to Login */}
             <div className="mt-2 text-center">
               <p className="text-sm text-white-900">
                 <b>

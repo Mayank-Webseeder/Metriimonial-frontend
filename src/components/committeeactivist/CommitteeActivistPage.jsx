@@ -37,7 +37,7 @@ const CommitteeActivistPage = () => {
           <option value="Sub-caste A">Sub-caste A</option>
           <option value="Sub-caste B">Sub-caste B</option>
         </select>
-       <Link to='/upload'> <button className="border px-4 py-2 rounded text-white bg-[#762140]">Upload</button></Link>
+       <Link to='/committee-activist/upload'> <button className="border px-4 py-2 rounded text-white bg-[#762140]">Upload</button></Link>
       </div>
 
       {/* Committee Cards Section */}

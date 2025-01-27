@@ -3,16 +3,38 @@ import React, { useState } from "react";
 const PostSuccessStory = () => {
   const [thoughts, setThoughts] = useState("");
   const [file, setFile] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setErrors({ ...errors, file: "" }); // Clear error for file
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    let isValid = true;
+
+    if (!thoughts.trim()) {
+      newErrors.thoughts = "Please add your thoughts.";
+      isValid = false;
+    }
+
+    if (!file) {
+      newErrors.file = "Please upload a couple's picture.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Thoughts:", thoughts);
-    console.log("File:", file);
+    if (validateForm()) {
+      console.log("Thoughts:", thoughts);
+      console.log("File:", file);
+      alert("Success story posted successfully!");
+    }
   };
 
   return (
@@ -27,6 +49,7 @@ const PostSuccessStory = () => {
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          {/* Rating Section */}
           <div className="flex justify-center space-x-1">
             {[...Array(5)].map((_, index) => (
               <svg
@@ -40,15 +63,27 @@ const PostSuccessStory = () => {
               </svg>
             ))}
           </div>
+
+          {/* Thoughts Section */}
           <div>
             <textarea
               rows="4"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-pink-300"
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-pink-300 ${
+                errors.thoughts ? "border-red-500" : "border-gray-300"
+              }`}
               placeholder="Add your thoughts..."
               value={thoughts}
-              onChange={(e) => setThoughts(e.target.value)}
+              onChange={(e) => {
+                setThoughts(e.target.value);
+                setErrors({ ...errors, thoughts: "" }); // Clear error for thoughts
+              }}
             ></textarea>
+            {errors.thoughts && (
+              <p className="text-red-500 text-sm mt-1">{errors.thoughts}</p>
+            )}
           </div>
+
+          {/* File Upload Section */}
           <div>
             <label
               htmlFor="file-upload"
@@ -61,11 +96,18 @@ const PostSuccessStory = () => {
                 id="file-upload"
                 type="file"
                 accept="image/*"
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-pink-300"
+                className={`w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-pink-300 ${
+                  errors.file ? "border-red-500" : "border-gray-300"
+                }`}
                 onChange={handleFileChange}
               />
             </div>
+            {errors.file && (
+              <p className="text-red-500 text-sm mt-1">{errors.file}</p>
+            )}
           </div>
+
+          {/* Submit Button */}
           <div>
             <button
               type="submit"
