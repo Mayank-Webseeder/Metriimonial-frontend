@@ -44,7 +44,7 @@ const Sidebar = () => {
         />
         {isHovered && (
           <div className="ml-2">
-            <h1 className="text-lg font-bold">Matrimonial</h1>
+            <h1 className="text-lg font-bold">Infinitalent</h1>
             <h2 className="text-xs">Dashboard</h2>
           </div>
         )}
