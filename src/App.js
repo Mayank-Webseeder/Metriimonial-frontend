@@ -20,6 +20,12 @@ import PersonalDetailsForm from "./components/PersonalDetailsForm";
 import NewsEvents from "./components/NewsEvents";
 import KathavachakProfile from "./components/KathavachakProfile";
 import AstrologerProfile from "./components/AstrologerProfile";
+import Feedback from "./components/Feedback";
+import ActivistList from "./components/ActivistList";
+import SavedProfiles from "./components/SavedProfiles";
+import SavedPandit from "./components/SavedPandit";
+import SavedDharmashala from "./components/SavedDharmashala";
+import SavedCommitie from "./components/SavedCommitie";
 import ProfilePage from "./components/profile/ProfilePage";
 import ProfileHeader from "./components/profileheader/ProfileHeader";
 // import AdminPanel from "./components/AdminPanel";
@@ -70,6 +76,18 @@ const App = () => {
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-form" element={<User />} />
         <Route path="/user-form/pandit-services" element={<PanditServices />} />
+        <Route path="/kathavachak-profile" element={<KathavachakProfile/>} />
+        <Route path="/astrologer-profile" element={<AstrologerProfile/>} />
+        <Route path="/feedback" element={<Feedback/>} />
+        <Route path="/activist-list" element={<ActivistList/>} />
+        <Route path="/saved-profiles" element={<SavedProfiles/>} />
+        <Route path="/saved-pandit" element={<SavedPandit/>} />
+        <Route path="/saved-dharmashala" element={<SavedDharmashala/>} />
+        <Route path="/saved-commitie" element={<SavedCommitie/>} /> 
+        <Route
+          path="/user-form/kathavachak-services"
+          element={<Kathavachak />}
+        />
         <Route path="/kathavachak-profile" element={<KathavachakProfile />} />
         <Route path="/astrologer-profile" element={<AstrologerProfile />} />
         <Route path="/profile-page" element={<ProfilePage />} />
@@ -98,4 +116,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App;
