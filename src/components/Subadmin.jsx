@@ -67,7 +67,7 @@ const CommunityMembers = () => {
   };
 
   return (
-    <div className="p-6 pt-0 bg-gray-900 min-h-screen">
+    <div className="p-6 pt-0 min-h-screen">
       <PageHeader title="Community Members" />
 
       <div className="flex justify-between items-center">
