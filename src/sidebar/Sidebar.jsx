@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { AiOutlineUser } from "react-icons/ai";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FaSignOutAlt,
@@ -17,7 +18,6 @@ import {
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("loggedIn");
@@ -25,71 +25,67 @@ const Sidebar = () => {
     navigate("/login");
   };
 
+  const menuItems = [
+    { path: "/home-page", label: "Home", icon: <FaHome /> },
+    { path: "/profile-page", label: "Profile", icon: <FaUserAlt /> },
+    { path: "/admin-dashboard", label: "Dashboard", icon: <FaHome /> },
+    { path: "/user-data", label: "User Details", icon: <FaUsers /> },
+    { path: "/sub-admin", label: "Sub-Admin", icon: <FaChalkboardTeacher /> },
+    { path: "/pandit", label: "Pandit Profile", icon: <FaBook /> },
+    {
+      path: "/kathavachak-profile",
+      label: "Kathavachak",
+      icon: <FaUserCircle />,
+    },
+    { path: "/astrologer-profile", label: "Astrologer", icon: <FaStar /> },
+    {
+      path: "/committee-activist",
+      label: "Activist & Committee",
+      icon: <FaHandshake />,
+    },
+    { path: "/dharm-shala", label: "Dharamshala", icon: <FaHotel /> },
+    { path: "/news&events", label: "News & Events", icon: <FaNewspaper /> },
+
+    { path: "/success-story", label: "Success Story", icon: <FaRegSmile /> },
+  ];
+
   return (
-    <div
-      className={`fixed top-0 left-0 h-screen bg-[#762140] text-white shadow-lg transition-all duration-300 z-50 flex flex-col ${
-        isHovered ? "w-64" : "w-16"
-      }`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Sidebar Header */}
-      <div className="flex items-center justify-center py-4">
-        <img
-          src="./download.jpeg"
-          alt="Logo"
-          className={`rounded-full border-2 border-white transition-all duration-300 object-cover ${
-            isHovered ? "w-16 h-16" : "w-10 h-10"
-          }`}
-        />
-        {isHovered && (
-          <div className="ml-2">
-            <h1 className="text-lg font-bold">Infinitalent</h1>
-            <h2 className="text-xs">Dashboard</h2>
-          </div>
-        )}
+    <div className="fixed top-0 left-0 h-screen w-64 bg-slate-900 text-slate-100 flex flex-col">
+      <div className="flex items-center gap-3 p-6  border-white/10">
+        <div className="w-12 h-12 flex justify-center items-center rounded-full bg-white/10 overflow-hidden">
+          <AiOutlineUser size={30} />
+        </div>
+        <div>
+          <h1 className="font-semibold text-white">Admin</h1>
+          <Link to="/" className="text-xs text-slate-500">
+            Dashboard
+          </Link>
+        </div>
       </div>
 
-      {/* Scrollable Menu */}
-      <div className="flex-1 overflow-y-auto scrollbar-hide px-2">
-        <nav className="mt-4">
-          <ul className="space-y-2">
-            {[
-              { path: "/profile-page", label: "Profile", icon: <FaUserAlt /> },
-              { path: "/admin-dashboard", label: "Dashboard", icon: <FaHome /> },
-              { path: "/user-data", label: "User Details", icon: <FaUsers /> },
-              { path: "/sub-admin", label: "Sub-Admin", icon: <FaChalkboardTeacher /> },
-              { path: "/pandit", label: "Pandit Profile", icon: <FaBook /> },
-              { path: "/kathavachak-profile", label: "Kathavachak", icon: <FaUserCircle /> },
-              { path: "/astrologer-profile", label: "Astrologer", icon: <FaStar /> },
-              { path: "/committee-activist", label: "Activist & Committee", icon: <FaHandshake /> },
-              { path: "/dharm-shala", label: "Dharamshala", icon: <FaHotel /> },
-              { path: "/news&events", label: "News & Events", icon: <FaNewspaper /> },
-              { path: "/home-page", label: "Home", icon: <FaHome /> },
-              { path: "/success-story", label: "Success Story", icon: <FaRegSmile /> },
-            ].map((item, index) => (
-              <li key={index}>
-                <Link
-                  to={item.path}
-                  className="flex items-center p-2 rounded-md hover:bg-white hover:text-[#762140] transition-colors duration-200"
-                >
-                  <span className="text-lg">{item.icon}</span>
-                  {isHovered && <span className="ml-4 text-sm font-medium">{item.label}</span>}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      <nav className="p-4 flex-1 overflow-y-auto">
+        <ul className="space-y-1">
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <Link
+                to={item.path}
+                className="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-slate-800 hover:text-white transition-colors"
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span className="text-sm font-medium">{item.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-      {/* Logout Button */}
-      <div className="p-2">
+      <div className="p-4 border-t border-white/10">
         <button
-          className="flex items-center justify-center w-full p-2 rounded-md bg-white text-[#762140] font-semibold shadow-md hover:bg-gray-200"
           onClick={handleLogout}
+          className="flex items-center justify-center w-full gap-2 px-4 py-2.5 rounded-md bg-slate-800 hover:bg-slate-700 text-white transition-colors"
         >
-          <FaSignOutAlt className="text-lg" />
-          {isHovered && <span className="ml-2">Logout</span>}
+          <FaSignOutAlt />
+          <span className="font-medium">Logout</span>
         </button>
       </div>
     </div>

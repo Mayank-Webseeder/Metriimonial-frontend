@@ -4,7 +4,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import UserManagement from "./components/UserManagement";
 import Panditprofile from "./components/Panditprofile";
 import LoginPage from "./components/LoginPage";
-import SignupPage from "./components/SignupForm";
 import AddSubAdmin from "./components/AddSubAdmin";
 import Protectedroutes from "./components/Protectedroutes";
 import Subadmin from "./components/Subadmin";
@@ -62,7 +61,6 @@ const App = () => {
     <Routes>
       {/* Public Routes */}
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
       {/* Protected Routes */}
       <Route element={<Protectedroutes />}>
         <Route path="/admin-dashboard" element={<Dashboard />} />
@@ -77,14 +75,14 @@ const App = () => {
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-form" element={<User />} />
         <Route path="/user-form/pandit-services" element={<PanditServices />} />
-        <Route path="/kathavachak-profile" element={<KathavachakProfile/>} />
-        <Route path="/astrologer-profile" element={<AstrologerProfile/>} />
-        <Route path="/feedback" element={<Feedback/>} />
-        <Route path="/activist-list" element={<ActivistList/>} />
-        <Route path="/saved-profiles" element={<SavedProfiles/>} />
-        <Route path="/saved-pandit" element={<SavedPandit/>} />
-        <Route path="/saved-dharmashala" element={<SavedDharmashala/>} />
-        <Route path="/saved-commitie" element={<SavedCommitie/>} /> 
+        <Route path="/kathavachak-profile" element={<KathavachakProfile />} />
+        <Route path="/astrologer-profile" element={<AstrologerProfile />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/activist-list" element={<ActivistList />} />
+        <Route path="/saved-profiles" element={<SavedProfiles />} />
+        <Route path="/saved-pandit" element={<SavedPandit />} />
+        <Route path="/saved-dharmashala" element={<SavedDharmashala />} />
+        <Route path="/saved-commitie" element={<SavedCommitie />} />
         <Route
           path="/user-form/kathavachak-services"
           element={<Kathavachak />}
@@ -96,21 +94,23 @@ const App = () => {
         <Route path="/committee-activist" element={<CommitteeActivistPage />} />
         <Route path="/dharm-shala" element={<DharmshalaPage />} />
 
-        <Route path="/user-form/kathavachak-services"element={<Kathavachak />}/>
+        <Route
+          path="/user-form/kathavachak-services"
+          element={<Kathavachak />}
+        />
         <Route path="/user-form/jyotish-services" element={<Jyotish />} />
         <Route path="/user-form/photo-upload" element={<UploadPhoto />} />
         <Route path="/home-page" element={<HomePage />} />
-        <Route path="/home/matrimonialprofiles" element={<MatrimonialProfiles />} />
+        <Route
+          path="/home/matrimonialprofiles"
+          element={<MatrimonialProfiles />}
+        />
         <Route path="/success-story" element={<SuccessStories />} />
         <Route path="/success-story/post" element={<PostSuccessStory />} />
         <Route path="/dharma-shala/upload" element={<DharamshalaForm />} />
         <Route path="/committee-activist/upload" element={<CommitteeForm />} />
 
         <Route path="/profile-page/edit-profile" element={<UpdateProfile />} />
-
-
-
-
       </Route>
 
       {/* Default Route (can be used to redirect users who are not authenticated) */}
@@ -119,4 +119,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App;

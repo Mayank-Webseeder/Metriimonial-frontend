@@ -1,9 +1,9 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import PageHeader from "./common/PageHeader";
 
 const SuccessStories = () => {
-
-   const navigate= useNavigate()
+  const navigate = useNavigate();
   const stories = [
     {
       id: 1,
@@ -14,52 +14,36 @@ const SuccessStories = () => {
     },
     {
       id: 2,
-      title: "Anjali And Ansual Story",
+      title: "Anjali And Anshul Story",
       content:
         "After years of searching, Priya and Arjun found each other on a matrimony platform. Initially hesitant, they connected over shared values and interests during virtual chats. Their bond grew stronger with every conversation, eventually leading to a heartfelt meeting arranged by their families. Today, they celebrate their love as a happily married couple, crediting the platform for bringing their destinies together.",
       image: "/SuccessStoryImage.jpg",
     },
   ];
-  const Handlenavigate=()=>{
-    navigate('/success-story/post')
-  }
+
+  const handleNavigate = () => {
+    navigate("/success-story/post");
+  };
 
   return (
-    <div className="bg-gray-50 min-h-screen"  >
-      {/* Header */}
-      <header className="flex items-center justify-between p-3 bg-pink-100 shadow-md ">
-        <button className="text-xl">
-          <i className="fas fa-arrow-left"></i>
-        </button>
-        <h1 className="text-lg font-bold" style={{ color: '#762140' }}>Success Stories</h1>
-        <div className="flex items-center space-x-4">
-          <button className="text-xl">
-            <i className="fas fa-bell"></i>
-          </button>
-          <button className="px-4 py-1 text-white  bg-[#762140] rounded" onClick={Handlenavigate}>Post</button>
-       
-        </div>
-      </header>
+    <div className="bg-slate-900 min-h-screen text-slate-100">
+      <PageHeader title="Success Stories" />
 
-      {/* Success Stories Section */}
-      <section className="p-4"  style={{textAlign:"center"}}>
+      <section className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {stories.map((story) => (
           <div
             key={story.id}
-            className="mb-6 bg-white rounded-lg shadow-md overflow-hidden"
-            style={{border:"2px solid black"}}
+            className="bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-slate-700"
           >
             <img
               loading="lazy"
               src={story.image}
               alt={story.title}
-              className=" w-3/4 max-w-md rounded mt-1"
-              style={{marginLeft:"10px"}}
-             
+              className="w-full h-48 object-cover"
             />
             <div className="p-4">
               <h2 className="text-lg font-bold mb-2">{story.title}</h2>
-              <p className="text-sm text-gray-600">{story.content}</p>
+              <p className="text-sm text-slate-300">{story.content}</p>
               <div className="mt-4 flex items-center">
                 {[...Array(5)].map((_, index) => (
                   <i
