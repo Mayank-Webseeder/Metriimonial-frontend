@@ -26,11 +26,13 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { path: "/home-page", label: "Home", icon: <FaHome /> },
-    { path: "/profile-page", label: "Profile", icon: <FaUserAlt /> },
     { path: "/admin-dashboard", label: "Dashboard", icon: <FaHome /> },
     { path: "/user-data", label: "User Details", icon: <FaUsers /> },
-    { path: "/sub-admin", label: "Sub-Admin", icon: <FaChalkboardTeacher /> },
+    {
+      path: "/community-members",
+      label: "Community Members",
+      icon: <FaChalkboardTeacher />,
+    },
     { path: "/pandit", label: "Pandit Profile", icon: <FaBook /> },
     {
       path: "/kathavachak-profile",
@@ -50,15 +52,15 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 h-screen w-64 bg-slate-900 text-slate-100 flex flex-col">
-      <div className="flex items-center gap-3 p-6  border-white/10">
+    <div className="fixed top-0 left-0 h-screen w-64 border-r border-white/20 text-slate-100 flex flex-col">
+      <div className="flex items-center gap-3 p-6 border-b border-white/20">
         <div className="w-12 h-12 flex justify-center items-center rounded-full bg-white/10 overflow-hidden">
           <AiOutlineUser size={30} />
         </div>
         <div>
           <h1 className="font-semibold text-white">Admin</h1>
-          <Link to="/" className="text-xs text-slate-500">
-            Dashboard
+          <Link to="/" className="text-xs text-slate-500 uppercase">
+            Raj Sharma
           </Link>
         </div>
       </div>
@@ -71,7 +73,7 @@ const Sidebar = () => {
                 to={item.path}
                 className="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-slate-800 hover:text-white transition-colors"
               >
-                <span className="text-lg">{item.icon}</span>
+                <span className="text-2xl">{item.icon}</span>
                 <span className="text-sm font-medium">{item.label}</span>
               </Link>
             </li>

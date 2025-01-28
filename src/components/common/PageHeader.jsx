@@ -10,7 +10,7 @@ const PageHeader = ({ title }) => {
           "linear-gradient(to right, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 90%)",
       }}
     >
-      <h1 className="font-semibold text-white text-center">{title}</h1>
+      <h1 className="font-semibold text-white text-2xl text-center">{title}</h1>
     </div>
   );
 };

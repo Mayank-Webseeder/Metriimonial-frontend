@@ -38,6 +38,7 @@ import Dashboard from "./components/Dashboard";
 import DharamshalaForm from "./components/dharmshala/DharamshalaForm";
 import UpdateProfile from "./components/updateprofiles/UpdateProfile";
 import CommitteeForm from "./components/committeeactivist/CommitteeForm";
+import SingleUser from "./components/SingleUser";
 
 const App = () => {
   return (
@@ -65,9 +66,10 @@ const App = () => {
       <Route element={<Protectedroutes />}>
         <Route path="/admin-dashboard" element={<Dashboard />} />
         <Route path="/user-data" element={<UserManagement />} />
+        <Route path="/user/:id" element={<SingleUser />} />
         <Route path="/personal-details" element={<PersonalDetailsForm />} />
         <Route path="/pandit" element={<Panditprofile />} />
-        <Route path="/sub-admin" element={<Subadmin />} />
+        <Route path="/community-members" element={<Subadmin />} />
         <Route path="/add-subadmin" element={<AddSubAdmin />} />
         <Route path="/update" element={<Userprofileupdate />} />
         <Route path="/update-pandit" element={<Panditprofileupdate />} />
