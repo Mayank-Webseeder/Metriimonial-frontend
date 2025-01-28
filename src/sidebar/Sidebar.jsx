@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FaSignOutAlt,
@@ -17,7 +17,6 @@ import {
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("loggedIn");
@@ -26,28 +25,18 @@ const Sidebar = () => {
   };
 
   return (
-    <div
-      className={`fixed top-0 left-0 h-screen bg-[#762140] text-white shadow-lg transition-all duration-300 z-50 flex flex-col ${
-        isHovered ? "w-64" : "w-16"
-      }`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="fixed top-0 left-0 h-screen w-64 bg-[#762140] text-white shadow-lg z-50 flex flex-col">
       {/* Sidebar Header */}
       <div className="flex items-center justify-center py-4">
         <img
           src="./download.jpeg"
           alt="Logo"
-          className={`rounded-full border-2 border-white transition-all duration-300 object-cover ${
-            isHovered ? "w-16 h-16" : "w-10 h-10"
-          }`}
+          className="rounded-full border-2 border-white w-16 h-16 object-cover"
         />
-        {isHovered && (
-          <div className="ml-2">
-            <h1 className="text-lg font-bold">Infinitalent</h1>
-            <h2 className="text-xs">Dashboard</h2>
-          </div>
-        )}
+        <div className="ml-2">
+          <h1 className="text-lg font-bold">Matrimonial</h1>
+          <h2 className="text-xs">Dashboard</h2>
+        </div>
       </div>
 
       {/* Scrollable Menu */}
@@ -73,8 +62,8 @@ const Sidebar = () => {
                   to={item.path}
                   className="flex items-center p-2 rounded-md hover:bg-white hover:text-[#762140] transition-colors duration-200"
                 >
-                  <span className="text-lg">{item.icon}</span>
-                  {isHovered && <span className="ml-4 text-sm font-medium">{item.label}</span>}
+                  <span className="text-xl">{item.icon}</span>
+                  <span className="ml-4 text-sm font-medium">{item.label}</span>
                 </Link>
               </li>
             ))}
@@ -89,7 +78,7 @@ const Sidebar = () => {
           onClick={handleLogout}
         >
           <FaSignOutAlt className="text-lg" />
-          {isHovered && <span className="ml-2">Logout</span>}
+          <span className="ml-2">Logout</span>
         </button>
       </div>
     </div>

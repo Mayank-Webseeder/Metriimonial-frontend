@@ -54,68 +54,62 @@ const ProfilePage = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-white-100 flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen bg-white-100 flex justify-center items-center p-4 md:pl-64">
             {/* Profile Section */}
-            <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-xl text-center">
+            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-6xl text-center">
                 {/* Background Image */}
                 <div className="relative">
                     <img
                         src="/ProfileImage.png"
                         alt="Cover"
-                        className="w-full h-48 object-cover rounded-lg"
+                        className="w-full h-56 object-cover rounded-t-lg"
                     />
                     {/* Profile Picture */}
-                    <div className="relative w-36 h-36 mx-auto">
+                    <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 w-44 h-44">
                         <img
                             src={userData.profilePic || '/ProfileImage.png'}
                             alt="Profile"
-                            className="w-36 h-36 rounded-full border-4 border-white"
+                            className="w-44 h-44 rounded-full border-4 border-white object-cover"
                         />
                         {/* Edit Camera Icon */}
-                        <div className="relative">
-                            <button
-                                onClick={handleEditProfile}
-                                className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
-                                title="Edit Profile"
+                        <button
+                            onClick={handleEditProfile}
+                            className="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+                            title="Edit Profile"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                stroke="currentColor"
+                                className="w-6 h-6 text-gray-600"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="2"
-                                    stroke="currentColor"
-                                    className="w-5 h-5 text-gray-600"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M15.232 5.232l3.536 3.536M9 11l3.536-3.536m0 0l5.464 5.464M5.636 8.464A4.5 4.5 0 118.464 5.636M12 15l-1.293 1.293m0 0a1.5 1.5 0 001.415 1.415m-1.415-1.415L9 19m6.536-5.464a4.5 4.5 0 105.464-5.464m-5.464 5.464L15 9"
-                                    />
-                                </svg>
-                            </button>
-                            {/* Tooltip */}
-                            <span className="absolute bottom-10 right-0 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 hover:opacity-100">
-                                Edit Profile
-                            </span>
-                        </div>
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M15.232 5.232l3.536 3.536M9 11l3.536-3.536m0 0l5.464 5.464M5.636 8.464A4.5 4.5 0 118.464 5.636M12 15l-1.293 1.293m0 0a1.5 1.5 0 001.415 1.415m-1.415-1.415L9 19m6.536-5.464a4.5 4.5 0 105.464-5.464m-5.464 5.464L15 9"
+                                />
+                            </svg>
+                        </button>
                     </div>
                 </div>
-                
+
                 {/* Name and Details Side by Side */}
-                <div className="mt-20 grid grid-cols-2 gap-4 text-left">
-                    <p><span className="font-bold">Name:</span> {userData.username}</p>
-                    <p><span className="font-bold">Phone:</span> {userData.mobileNo}</p>
-                    <p><span className="font-bold">DOB:</span> {userData.dob}</p>
-                    <p><span className="font-bold">City:</span> {userData.city}</p>
-                    <p><span className="font-bold">Gender:</span> {userData.gender}</p>
+                <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <p className="font-semibold text-gray-700">Name: <span className="font-serif">{userData.username}</span></p>
+                    <p className="font-semibold text-gray-700">Phone: <span className="font-serif">{userData.mobileNo}</span></p>
+                    <p className="font-semibold text-gray-700">DOB: <span className="font-serif">{userData.dob}</span></p>
+                    <p className="font-semibold text-gray-700">City: <span className="font-serif">{userData.city}</span></p>
+                    <p className="font-semibold text-gray-700">Gender: <span className="font-serif">{userData.gender}</span></p>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="grid grid-cols-2 gap-4 mt-6 text-sm">
-                    <button onClick={HandlenavigateToBiodata} className="flex items-center justify-center p-3 bg-[#762140] text-white rounded-lg hover:bg-[#762140]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 text-sm">
+                    <button onClick={HandlenavigateToBiodata} className="flex items-center justify-center p-4 bg-[#762140] text-white rounded-lg hover:bg-[#5e1a32]">
                         📄 Create Bio Data
                     </button>
-                    <button onClick={() => HandlenavigateToRegister()} className="flex items-center justify-center p-3 bg-[#762140] text-white rounded-lg hover:bg-[#762140]">
+                    <button onClick={HandlenavigateToRegister} className="flex items-center justify-center p-4 bg-[#762140] text-white rounded-lg hover:bg-[#5e1a32]">
                         ➕ Register as Pandit/Jyotish/Kathavachak
                     </button>
                 </div>
