@@ -1,23 +1,41 @@
 import { AiFillEdit } from "react-icons/ai";
 import { AiOutlineRollback } from "react-icons/ai";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PageHeader from "./common/PageHeader";
-import { panditMockData } from "./data/panditMockData";
+import {
+  panditProfiles,
+  jyotishProfiles,
+  kathavachakProfiles,
+} from "./data/specialistMockData";
 
-const PanditProfile = () => {
-  const { id } = useParams();
+const SpecialistProfile = () => {
+  const { userType, id } = useParams();
   const navigate = useNavigate();
+  const [profileData, setProfileData] = useState([]);
 
-  const pandit = panditMockData.find((p) => p.id == id);
+  // Use useEffect to set profileData based on userType
+  useEffect(() => {
+    if (userType === "pandit") {
+      setProfileData(panditProfiles);
+    } else if (userType === "astrologer") {
+      setProfileData(jyotishProfiles);
+    } else if (userType === "kathavachak") {
+      setProfileData(kathavachakProfiles);
+    } else {
+      setProfileData([]);
+    }
+  }, [userType]); // This effect runs when `userType` changes
 
-  if (!pandit) {
-    return <p>Pandit not found.</p>;
+  const profile = profileData.find((p) => p.id == id);
+
+  if (!profile) {
+    return <p>Profile not found.</p>;
   }
 
   return (
     <div className="min-h-screen text-white px-6 sm:px-8 md:px-12">
-      <PageHeader title="Pandit Details" />
+      <PageHeader title={`${userType} Details`} />
       <div className="max-w-7xl mx-auto mt-6">
         <div className="flex justify-between items-center">
           <button
@@ -45,35 +63,35 @@ const PanditProfile = () => {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <strong className="text-gray-600 w-40">Name:</strong>
-                  <span className="text-black">{pandit.fullName}</span>
+                  <span className="text-black">{profile.fullName}</span>
                 </div>
                 <div className="flex items-center">
                   <strong className="text-gray-600 w-40">Mobile:</strong>
-                  <span className="text-black">{pandit.mobile}</span>
+                  <span className="text-black">{profile.mobile}</span>
                 </div>
                 <div className="flex items-center">
                   <strong className="text-gray-600 w-40">State:</strong>
-                  <span className="text-black">{pandit.state}</span>
+                  <span className="text-black">{profile.state}</span>
                 </div>
                 <div className="flex items-center">
                   <strong className="text-gray-600 w-40">Village/City:</strong>
-                  <span className="text-black">{pandit.villageCity}</span>
+                  <span className="text-black">{profile.villageCity}</span>
                 </div>
-                {pandit.area && (
+                {profile.area && (
                   <div className="flex items-center">
                     <strong className="text-gray-600 w-40">Area:</strong>
-                    <span className="text-black">{pandit.area}</span>
+                    <span className="text-black">{profile.area}</span>
                   </div>
                 )}
               </div>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <strong className="text-gray-600 w-40">Aadhar Number:</strong>
-                  <span className="text-black">{pandit.aadhar}</span>
+                  <span className="text-black">{profile.aadhar}</span>
                 </div>
                 <div className="flex items-center">
                   <strong className="text-gray-600 w-40">Sub Caste:</strong>
-                  <span className="text-black">{pandit.subCaste}</span>
+                  <span className="text-black">{profile.subCaste}</span>
                 </div>
               </div>
             </div>
@@ -87,17 +105,19 @@ const PanditProfile = () => {
             <div className="space-y-4">
               <div className="flex items-center">
                 <strong className="text-gray-600 w-40">Services:</strong>
-                <span className="text-black">{pandit.services.join(", ")}</span>
+                <span className="text-black">
+                  {profile.services.join(", ")}
+                </span>
               </div>
               <div className="flex items-center">
                 <strong className="text-gray-600 w-40">Experience:</strong>
-                <span className="text-black">{pandit.experience} years</span>
+                <span className="text-black">{profile.experience} years</span>
               </div>
             </div>
           </div>
 
           {/* Subscription Details */}
-          {pandit.isSubscribed && (
+          {profile.isSubscribed && (
             <div className="bg-gray-100 rounded-lg p-8 shadow-lg">
               <h2 className="text-3xl font-semibold text-gray-900 mb-6">
                 Subscription Details
@@ -107,23 +127,23 @@ const PanditProfile = () => {
                   <div className="flex items-center">
                     <strong className="text-gray-600 w-40">Website:</strong>
                     <a
-                      href={pandit.website}
+                      href={profile.website}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-500"
                     >
-                      {pandit.website}
+                      {profile.website}
                     </a>
                   </div>
                   <div className="flex items-center">
                     <strong className="text-gray-600 w-40">YouTube:</strong>
                     <a
-                      href={pandit.youtube}
+                      href={profile.youtube}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-500"
                     >
-                      {pandit.youtube}
+                      {profile.youtube}
                     </a>
                   </div>
                 </div>
@@ -131,12 +151,12 @@ const PanditProfile = () => {
                   <div className="flex items-center">
                     <strong className="text-gray-600 w-40">WhatsApp:</strong>
                     <a
-                      href={pandit.whatsapp}
+                      href={profile.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-500"
                     >
-                      {pandit.whatsapp}
+                      {profile.whatsapp}
                     </a>
                   </div>
                   <div className="flex items-center">
@@ -145,7 +165,7 @@ const PanditProfile = () => {
                     </strong>
                     <div className="flex gap-2">
                       <a
-                        href={pandit.facebook}
+                        href={profile.facebook}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-500"
@@ -153,7 +173,7 @@ const PanditProfile = () => {
                         Facebook
                       </a>
                       <a
-                        href={pandit.instagram}
+                        href={profile.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-500"
@@ -171,8 +191,8 @@ const PanditProfile = () => {
                   Subscription Images
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                  {pandit.subscriptionImages &&
-                    pandit.subscriptionImages.map((img, index) => (
+                  {profile.subscriptionImages &&
+                    profile.subscriptionImages.map((img, index) => (
                       <img
                         key={index}
                         src={img}
@@ -190,4 +210,4 @@ const PanditProfile = () => {
   );
 };
 
-export default PanditProfile;
+export default SpecialistProfile;

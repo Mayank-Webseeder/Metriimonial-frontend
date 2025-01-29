@@ -1,6 +1,8 @@
+import { MdOutlinePeopleAlt } from "react-icons/md";
+import { MdReportGmailerrorred } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaSignOutAlt,
   FaHome,
@@ -18,6 +20,7 @@ import {
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem("loggedIn");
@@ -27,28 +30,39 @@ const Sidebar = () => {
 
   const menuItems = [
     { path: "/admin-dashboard", label: "Dashboard", icon: <FaHome /> },
-    { path: "/user-data", label: "User Details", icon: <FaUsers /> },
+    { path: "/all-users", label: "All Users", icon: <FaUsers /> },
+    {
+      path: "/matrimonial-profiles",
+      label: "Matrimonial Profiles",
+      icon: <MdOutlinePeopleAlt />,
+    },
+
+    { path: "/specialist/pandit", label: "Pandit Profile", icon: <FaBook /> },
+    {
+      path: "/specialist/kathavachak",
+      label: "Kathavachak",
+      icon: <FaUserCircle />,
+    },
+    { path: "/specialist/astrologer", label: "Astrologer", icon: <FaStar /> },
     {
       path: "/community-members",
       label: "Community Members",
       icon: <FaChalkboardTeacher />,
     },
-    { path: "/pandit", label: "Pandit Profile", icon: <FaBook /> },
     {
-      path: "/kathavachak-profile",
-      label: "Kathavachak",
-      icon: <FaUserCircle />,
-    },
-    { path: "/astrologer-profile", label: "Astrologer", icon: <FaStar /> },
-    {
-      path: "/committee-activist",
-      label: "Activist & Committee",
+      path: "/activist-profiles",
+      label: "Activist Profiles",
       icon: <FaHandshake />,
+    },
+    {
+      path: "/profile-reports",
+      label: "Profile Reports",
+      icon: <MdReportGmailerrorred />,
     },
     { path: "/dharm-shala", label: "Dharamshala", icon: <FaHotel /> },
     { path: "/news&events", label: "News & Events", icon: <FaNewspaper /> },
 
-    { path: "/success-story", label: "Success Story", icon: <FaRegSmile /> },
+    // { path: "/success-story", label: "Success Story", icon: <FaRegSmile /> },
   ];
 
   return (
@@ -71,7 +85,9 @@ const Sidebar = () => {
             <li key={index}>
               <Link
                 to={item.path}
-                className="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-slate-800 hover:text-white transition-colors"
+                className={`flex items-center gap-3 px-4 py-3 rounded-md ${
+                  location.pathname === item.path ? "bg-slate-800" : ""
+                } hover:bg-slate-800 hover:text-white transition-colors`}
               >
                 <span className="text-2xl">{item.icon}</span>
                 <span className="text-sm font-medium">{item.label}</span>

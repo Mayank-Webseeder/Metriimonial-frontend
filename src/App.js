@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 // import Sidebar from "./sidebar/Sidebar"; // Match exact casing
 import UserManagement from "./components/UserManagement";
-import Panditprofile from "./components/Panditprofile";
+import SpecialistProfile from "./components/SpecialistProfile";
 import LoginPage from "./components/LoginPage";
 import AddSubAdmin from "./components/AddSubAdmin";
 import Protectedroutes from "./components/Protectedroutes";
@@ -31,7 +31,7 @@ import ProfileHeader from "./components/profileheader/ProfileHeader";
 import CommitteeActivistPage from "./components/committeeactivist/CommitteeActivistPage";
 import DharmshalaPage from "./components/dharmshala/DharmshalaPage";
 import HomePage from "./components/Homepage";
-import MatrimonialProfiles from "./components/MatrimonialProfiles";
+import MatrimonialProfiles from "./components/pages/MatrimonialProfiles";
 import SuccessStories from "./components/SuccessStories";
 import PostSuccessStory from "./components/PostSuccessStory";
 import Dashboard from "./components/Dashboard";
@@ -40,37 +40,25 @@ import UpdateProfile from "./components/updateprofiles/UpdateProfile";
 import CommitteeForm from "./components/committeeactivist/CommitteeForm";
 import SingleUser from "./components/SingleUser";
 import SingleUserPKA from "./components/SingleUserPKA";
+import ReportManagementPage from "./components/pages/ReportManagement";
+import ActivistsProfile from "./components/pages/ActivistsProfile";
 
 const App = () => {
   return (
-    // <div className="flex">
-    //   {/* Sidebar */}
-    //   {/* <Sidebar /> */}
-    //   {/* Main Content */}
-    //   <div className="flex-1 p-6">
-    //     <Routes>
-    //     <Route path="/login" element={<LoginPage />} />
-    //     <Route path="/signup" element={<SignupPage />} />
-    //     <Route path="/otp" element={<OTPVerification />} />
-    //     <Route path="/subadmin" element={<SubAdminUser />} />
-    //       <Route path="/user-data" element={<Userslide1 />} />
-    //       {/* Additional Routes can go here */}
-    //       <Route path="/pandit" element={<Panditprofile/>}/>
-    //     </Routes>
-    //   </div>
-    // </div>
-
     <Routes>
       {/* Public Routes */}
       <Route path="/login" element={<LoginPage />} />
       {/* Protected Routes */}
       <Route element={<Protectedroutes />}>
         <Route path="/admin-dashboard" element={<Dashboard />} />
-        <Route path="/user-data" element={<UserManagement />} />
+        <Route path="/all-users" element={<UserManagement />} />
+        <Route path="/matrimonial-profiles" element={<MatrimonialProfiles />} />
         <Route path="/user/:id" element={<SingleUser />} />
         <Route path="/personal-details" element={<PersonalDetailsForm />} />
-        <Route path="/pandit" element={<Panditprofile />} />
-        <Route path="/pandit/:id" element={<SingleUserPKA />} />
+        <Route path="/specialist/:userType" element={<SpecialistProfile />} />
+        <Route path="/:userType/:id" element={<SingleUserPKA />} />
+        <Route path="/activist-profiles" element={<ActivistsProfile />} />
+        <Route path="/profile-reports" element={<ReportManagementPage />} />
         <Route path="/community-members" element={<Subadmin />} />
         <Route path="/add-subadmin" element={<AddSubAdmin />} />
         <Route path="/update" element={<Userprofileupdate />} />

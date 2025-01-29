@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PageHeader from "./common/PageHeader";
+import PageHeader from "../common/PageHeader";
 import { Link } from "react-router-dom";
-import { mockUsers } from "./data/mockusers";
+import { mockUsers } from "../data/mockusers";
 
 const genderData = [
   { label: "Male", value: "Male" },
@@ -18,7 +18,7 @@ const subscriptionData = [
   { label: "Not Subscribed", value: false },
 ];
 
-const UserManagementPage = () => {
+const MatrimonialProfiles = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(mockUsers);
   const [startDate, setStartDate] = useState("");
@@ -119,7 +119,7 @@ const UserManagementPage = () => {
 
   return (
     <div className="min-h-screen p-8 pt-0">
-      <PageHeader title="User Management" />
+      <PageHeader title="Matrimonial Profiles" />
       <div className="max-w-8xl mx-auto bg-white mt-6 p-6 rounded-lg shadow-lg">
         {/* Search and Filter Section */}
         <div className="flex justify-between mb-4">
@@ -200,7 +200,7 @@ const UserManagementPage = () => {
               <th className="py-3 px-4 text-left">Mobile</th>
               <th className="py-3 px-4 text-left">Created At</th>
               <th className="py-3 px-4 text-left">Subscribed</th>
-              <th className="py-3 px-4 text-left">Subscribed For</th>
+              <th className="py-3 px-4 text-left">Subscription Expiry</th>
               <th className="py-3 px-4 text-left">Access</th>
             </tr>
           </thead>
@@ -226,7 +226,7 @@ const UserManagementPage = () => {
                     {user.subscription ? "Yes" : "No"}
                   </span>
                 </td>
-                <td className="py-3 px-4">- </td>
+                <td className="py-3 px-4">-</td>
 
                 <td className="py-3 px-4">
                   <label className="relative inline-flex items-center cursor-pointer">
@@ -238,7 +238,7 @@ const UserManagementPage = () => {
                     />
                     <span className="w-11 h-6 bg-slate-200 rounded-full inline-flex items-center">
                       <span
-                        className={`w-4 h-4  rounded-full shadow-md transform transition-all duration-300 ease-in-out ${
+                        className={`w-4 h-4 rounded-full shadow-md transform transition-all duration-300 ease-in-out ${
                           user.isEnabled
                             ? "translate-x-6 bg-green-500"
                             : "translate-x-1 bg-red-500"
@@ -256,4 +256,4 @@ const UserManagementPage = () => {
   );
 };
 
-export default UserManagementPage;
+export default MatrimonialProfiles;
