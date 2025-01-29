@@ -1,6 +1,7 @@
 export const mockUsers = [
   {
     id: Math.floor(10000 + Math.random() * 90000), // Random 5-digit ID
+    appliedFor: "Activist",
     fullName: "Arjun Sharma",
     city: "New Delhi",
     gender: "Male",
@@ -52,6 +53,7 @@ export const mockUsers = [
   {
     id: Math.floor(10000 + Math.random() * 90000), // Random 5-digit ID
     fullName: "Priya Verma",
+    appliedFor: "Pandit",
     city: "Mumbai",
     gender: "Female",
     mobile: "+91 98201 76543",
@@ -102,6 +104,7 @@ export const mockUsers = [
   {
     id: Math.floor(10000 + Math.random() * 90000), // Random 5-digit ID
     fullName: "Aishwarya Gupta",
+    appliedFor: "Kathavachak",
     city: "Bangalore",
     gender: "Female",
     mobile: "+91 99123 45678",
@@ -152,6 +155,7 @@ export const mockUsers = [
   {
     id: Math.floor(10000 + Math.random() * 90000), // Random 5-digit ID
     fullName: "Ravi Patel",
+    appliedFor: "Astrologer",
     city: "Ahmedabad",
     gender: "Male",
     mobile: "+91 99988 77766",

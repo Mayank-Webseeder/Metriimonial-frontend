@@ -42,6 +42,8 @@ import SingleUser from "./components/SingleUser";
 import SingleUserPKA from "./components/SingleUserPKA";
 import ReportManagementPage from "./components/pages/ReportManagement";
 import ActivistsProfile from "./components/pages/ActivistsProfile";
+import ProfileApprovals from "./components/pages/ProfileApprovals";
+import SubscriptionManagent from "./components/pages/SubscriptionManagent";
 
 const App = () => {
   return (
@@ -58,6 +60,11 @@ const App = () => {
         <Route path="/specialist/:userType" element={<SpecialistProfile />} />
         <Route path="/:userType/:id" element={<SingleUserPKA />} />
         <Route path="/activist-profiles" element={<ActivistsProfile />} />
+        <Route path="/profile-approvals" element={<ProfileApprovals />} />
+        <Route
+          path="/manage-subscriptions"
+          element={<SubscriptionManagent />}
+        />
         <Route path="/profile-reports" element={<ReportManagementPage />} />
         <Route path="/community-members" element={<Subadmin />} />
         <Route path="/add-subadmin" element={<AddSubAdmin />} />

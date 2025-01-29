@@ -215,7 +215,7 @@ const MatrimonialProfiles = () => {
                 <td className="py-3 px-4">{user.gender}</td>
                 <td className="py-3 px-4">{user.mobile}</td>
                 <td className="py-3 px-4">
-                  {new Date(user.createdAt).toLocaleDateString()}
+                  {new Date(user.createdAt).toLocaleDateString("en-GB")}
                 </td>
                 <td className="py-3 px-4">
                   <span

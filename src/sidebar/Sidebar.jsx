@@ -1,3 +1,5 @@
+import { MdManageHistory } from "react-icons/md";
+import { MdApproval } from "react-icons/md";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 import { MdReportGmailerrorred } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
@@ -53,6 +55,16 @@ const Sidebar = () => {
       path: "/activist-profiles",
       label: "Activist Profiles",
       icon: <FaHandshake />,
+    },
+    {
+      path: "/profile-approvals",
+      label: "Profile Approvals",
+      icon: <MdApproval />,
+    },
+    {
+      path: "/manage-subscriptions",
+      label: "Subscription",
+      icon: <MdManageHistory />,
     },
     {
       path: "/profile-reports",
