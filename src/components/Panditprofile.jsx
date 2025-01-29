@@ -1,138 +1,155 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { deletePandit, updatePandit } from "../redux/pandit/Panditslice";
-import { FaTrash, FaEdit, FaEye } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import PageHeader from "./common/PageHeader";
+import { Link } from "react-router-dom";
+import { panditMockData } from "./data/panditMockData";
 
-function Panditprofile() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.panditData);
+const UserManagementPage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [stateFilter, setStateFilter] = useState("");
+  const [cityFilter, setCityFilter] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState(panditMockData);
 
-  const [search, setSearch] = useState("");
-  const [filterAge, setFilterAge] = useState("");
-  const [selectedUser, setSelectedUser] = useState(null); // For modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const states = [...new Set(panditMockData.map((user) => user.state))];
+  const cities = [...new Set(panditMockData.map((user) => user.villageCity))];
 
-  const handleDelete = (id) => {
-    if (window.confirm("Really want to delete the profile!!!!")) {
-      dispatch(deletePandit(id));
-    }
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    filterUsers(e.target.value, stateFilter, cityFilter);
   };
 
-  const handleUpdate = (id) => {
-    const panditToUpdate = users.find((user) => user.id === id);
-    localStorage.setItem("selectedpandit", JSON.stringify(panditToUpdate));
-    navigate("/update-pandit");
+  const handleStateFilter = (e) => {
+    setStateFilter(e.target.value);
+    filterUsers(searchQuery, e.target.value, cityFilter);
   };
 
-  const handleView = (user) => {
-    setSelectedUser(user);
-    setIsModalOpen(true);
+  const handleCityFilter = (e) => {
+    setCityFilter(e.target.value);
+    filterUsers(searchQuery, stateFilter, e.target.value);
   };
 
-  const filteredUsers = users.filter(
-    (user) =>
-      user.name.toLowerCase().includes(search.toLowerCase()) &&
-      (!filterAge || user.age.toString() === filterAge)
-  );
+  const filterUsers = (query, state, city) => {
+    let filtered = panditMockData.filter((user) =>
+      user.fullName.toLowerCase().includes(query.toLowerCase())
+    );
+    if (state) filtered = filtered.filter((user) => user.state === state);
+    if (city) filtered = filtered.filter((user) => user.villageCity === city);
+
+    setFilteredUsers(filtered);
+  };
+
+  const handleToggle = (index) => {
+    const updatedUsers = [...filteredUsers];
+    updatedUsers[index].isEnabled = !updatedUsers[index].isEnabled;
+    setFilteredUsers(updatedUsers);
+  };
 
   return (
-    <div className="ml-64 p-6">
-      <h1 className="text-4xl font-bold mb-4">Pandit Details</h1>
+    <div className="min-h-screen p-8 pt-0">
+      <PageHeader title="User Management" />
+      <div className="max-w-8xl mx-auto bg-white mt-6 p-6 rounded-lg shadow-lg">
+        {/* Search and Filter Section */}
+        <div className="flex justify-start mb-4 space-x-4">
+          <input
+            type="text"
+            className="p-2 border rounded-md bg-slate-100 text-slate-900"
+            placeholder="Search by name..."
+            value={searchQuery}
+            onChange={handleSearch}
+          />
 
-      {/* Search and Filter */}
-      <div className="flex space-x-4 mb-6">
-        <input
-          type="text"
-          placeholder="Search by name"
-          className="p-2 border rounded-md w-1/3 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Filter by age"
-          className="p-2 border rounded-md w-1/3 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300"
-          value={filterAge}
-          onChange={(e) => setFilterAge(e.target.value)}
-        />
-      </div>
+          <select
+            className="p-2 border rounded-md bg-slate-100 text-slate-900"
+            value={stateFilter}
+            onChange={handleStateFilter}
+          >
+            <option value="">Filter by state</option>
+            {states.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
 
-      {/* User Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse rounded-lg shadow-lg overflow-hidden">
-          <thead>
-            <tr className="bg-[#762140] text-white">
-              <th className="border p-4 text-left font-semibold">Name</th>
-              <th className="border p-4 text-left font-semibold">Age</th>
-              <th className="border p-4 text-left font-semibold">Email</th>
-              <th className="border p-4 text-left font-semibold">View</th>
-              <th className="border p-4 text-left font-semibold">Actions</th>
+          <select
+            className="p-2 border rounded-md bg-slate-100 text-slate-900"
+            value={cityFilter}
+            onChange={handleCityFilter}
+          >
+            <option value="">Filter by village/city</option>
+            {cities.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* User Table */}
+        <table className="min-w-full table-auto bg-slate-50 rounded-lg shadow-md overflow-hidden">
+          <thead className="bg-slate-900 text-slate-100">
+            <tr>
+              <th className="py-3 px-4 text-left">Name</th>
+              <th className="py-3 px-4 text-left">Mobile</th>
+              <th className="py-3 px-4 text-left">State</th>
+              <th className="py-3 px-4 text-left">Village/City</th>
+              <th className="py-3 px-4 text-left">Subscribed</th>
+              <th className="py-3 px-4 text-left">Status</th>
+              <th className="py-3 px-4 text-left">Action</th>
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user) => (
-              <tr
-                key={user.id}
-                className="hover:bg-blue-50 even:bg-gray-50">
-                <td className="border p-4 text-gray-700">{user.name}</td>
-                <td className="border p-4 text-gray-700">{user.age}</td>
-                <td className="border p-4 text-gray-700">{user.email}</td>
-                <td className="border p-4">
-                  <button
-                    onClick={() => handleView(user)}
-                    className="px-3 py-1 text-white bg-[#762140] rounded-md flex items-center space-x-2 hover:bg-[#5b1a31]"
-                  >
-                    <FaEye className="mr-1" />
-                    View
-                  </button>
+            {filteredUsers.map((user, index) => (
+              <tr key={index} className="hover:bg-slate-100">
+                <td className="py-3 px-4 text-blue-600">
+                  <Link to={`/pandit/${user.id}`}>{user.fullName}</Link>
                 </td>
-                <td className="border p-4 flex space-x-2">
-                  <button
-                    onClick={() => handleUpdate(user.id)}
-                    className="px-3 py-1 text-white bg-blue-500 rounded-md flex items-center space-x-2 hover:bg-blue-600"
+                <td className="py-3 px-4">{user.mobile}</td>
+                <td className="py-3 px-4">{user.state}</td>
+                <td className="py-3 px-4">{user.villageCity}</td>
+                <td className="py-3 px-4">
+                  <span
+                    className={`text-sm font-medium ${
+                      user.isSubscribed ? "text-green-500" : "text-red-500"
+                    }`}
                   >
-                    <FaEdit className="mr-1" />
-                    Update
-                  </button>
-                  <button
-                    onClick={() => handleDelete(user.id)}
-                    className="px-3 py-1 text-white bg-red-500 rounded-md flex items-center space-x-2 hover:bg-red-600"
+                    {user.isSubscribed ? "Yes" : "No"}
+                  </span>
+                </td>
+                <td className="py-3 px-4">
+                  <span
+                    className={`text-sm font-medium ${
+                      user.isEnabled ? "text-green-500" : "text-red-500"
+                    }`}
                   >
-                    <FaTrash className="mr-1" />
-                    Delete
-                  </button>
+                    {user.isEnabled ? "Enabled" : "Disabled"}
+                  </span>
+                </td>
+                <td className="py-3 px-4">
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={user.isEnabled}
+                      onChange={() => handleToggle(index)}
+                    />
+                    <span className="w-11 h-6 bg-slate-200 rounded-full inline-flex items-center">
+                      <span
+                        className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-all duration-300 ease-in-out ${
+                          user.isEnabled
+                            ? "translate-x-6 bg-green-500"
+                            : "translate-x-1 bg-red-500"
+                        }`}
+                      ></span>
+                    </span>
+                  </label>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      {/* Modal */}
-      {isModalOpen && selectedUser && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-md w-96 shadow-lg">
-            <h2 className="text-xl font-bold mb-4">User Details</h2>
-            <p><strong>Name:</strong> {selectedUser.name}</p>
-            <p><strong>Age:</strong> {selectedUser.age}</p>
-            <p><strong>Email:</strong> {selectedUser.email}</p>
-            <p><strong>Description:</strong> {selectedUser.description}</p>
-
-            <div className="mt-4 flex justify-end">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-3 py-1 text-white bg-red-500 rounded-md hover:bg-red-600"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
-}
+};
 
-export default Panditprofile;
+export default UserManagementPage;
