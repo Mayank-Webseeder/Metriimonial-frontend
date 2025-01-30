@@ -1,3 +1,4 @@
+import { IoIosNotificationsOutline } from "react-icons/io";
 import { MdManageHistory } from "react-icons/md";
 import { MdApproval } from "react-icons/md";
 import { MdOutlinePeopleAlt } from "react-icons/md";
@@ -25,13 +26,16 @@ const Sidebar = () => {
   const location = useLocation();
 
   const handleLogout = () => {
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("userInfo");
-    navigate("/login");
+    let confirmation = window.confirm("Are you sure you want to logout?");
+    if (confirmation) {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("userInfo");
+      navigate("/login");
+    }
   };
 
   const menuItems = [
-    { path: "/admin-dashboard", label: "Dashboard", icon: <FaHome /> },
+    { path: "/", label: "Dashboard", icon: <FaHome /> },
     { path: "/all-users", label: "All Users", icon: <FaUsers /> },
     {
       path: "/matrimonial-profiles",
@@ -91,7 +95,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <nav className="p-4 flex-1 overflow-y-auto">
+      <nav className="p-4 flex-1 overflow-y-auto custom-scroll">
         <ul className="space-y-1">
           {menuItems.map((item, index) => (
             <li key={index}>
@@ -109,7 +113,16 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      <div className="p-4 border-t border-white/10">
+      <div className="p-4 border-t border-white/10 space-y-4">
+        <Link
+          to="/notifications"
+          className="flex relative items-center justify-center w-full gap-2 px-4 py-2.5 rounded-md bg-slate-800 hover:bg-slate-700 text-white transition-colors"
+        >
+          <IoIosNotificationsOutline size={30} /> Notifications
+          <span className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 h-6 w-6 text-xs flex justify-center items-center rounded-full bg-red-400">
+            99
+          </span>
+        </Link>
         <button
           onClick={handleLogout}
           className="flex items-center justify-center w-full gap-2 px-4 py-2.5 rounded-md bg-slate-800 hover:bg-slate-700 text-white transition-colors"

@@ -71,7 +71,7 @@ const LoginForm = () => {
           localStorage.setItem("loggedIn", "true");
           localStorage.setItem("userInfo", JSON.stringify(data.user));
           localStorage.setItem("message", data.message);
-          navigate("/user-data");
+          navigate("/");
         } else {
           setErrors(data.message || "Invalid mobile number or password");
         }

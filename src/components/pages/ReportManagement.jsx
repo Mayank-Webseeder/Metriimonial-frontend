@@ -109,10 +109,12 @@ const ReportManagementPage = () => {
               filteredReports.map((report, index) => (
                 <tr key={index} className="hover:bg-slate-100">
                   <td className="py-3 px-4 text-blue-600">
-                    {report.reportedByProfileName}
+                    {report.reportedByProfileName} - (
+                    <span className="text-black">{report.reporterid}</span>)
                   </td>
                   <td className="py-3 px-4 text-blue-600">
-                    {report.reportedProfileName}
+                    {report.reportedProfileName} - (
+                    <span className="text-black">{report.reportedid}</span>)
                   </td>
                   <td className="py-3 px-4">{report.reason}</td>
                   <td className="py-3 px-4">{report.additionalDescription}</td>

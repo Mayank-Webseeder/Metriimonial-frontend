@@ -44,15 +44,17 @@ import ReportManagementPage from "./components/pages/ReportManagement";
 import ActivistsProfile from "./components/pages/ActivistsProfile";
 import ProfileApprovals from "./components/pages/ProfileApprovals";
 import SubscriptionManagent from "./components/pages/SubscriptionManagent";
+import Notifications from "./components/pages/Notifications";
 
 const App = () => {
   return (
     <Routes>
       {/* Public Routes */}
-      <Route path="/login" element={<LoginPage />} />
       {/* Protected Routes */}
+      <Route path="/login" element={<LoginPage />} />
       <Route element={<Protectedroutes />}>
-        <Route path="/admin-dashboard" element={<Dashboard />} />
+        <Route path="/" index element={<Dashboard />} />
+        <Route path="/notifications" index element={<Notifications />} />
         <Route path="/all-users" element={<UserManagement />} />
         <Route path="/matrimonial-profiles" element={<MatrimonialProfiles />} />
         <Route path="/user/:id" element={<SingleUser />} />
@@ -113,7 +115,6 @@ const App = () => {
       </Route>
 
       {/* Default Route (can be used to redirect users who are not authenticated) */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 };
